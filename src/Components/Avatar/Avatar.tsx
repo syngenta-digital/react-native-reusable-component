@@ -12,7 +12,7 @@ interface AvatarProp {
   size?: 'large' | 'small' | 'default' | number //To be implemented
 }
 
-const Avatar = ({ text, source, style, onPress, shape, size }: AvatarProp) => (
+const Avatar = ({ text, source, style, onPress }: AvatarProp) => (
   <TouchableOpacity onPress={onPress} style={[styles.avatarStyle, style]}>
     {source ? (
       <Image

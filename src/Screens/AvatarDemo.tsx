@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Alert } from 'react-native'
+import { View, StyleSheet, Alert } from 'react-native'
 import Avatar from '../Components/Avatar/Avatar'
 import { colors } from '../Theme/Colors'
 import { spacing } from '../Theme/Constants'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native'
-import { sizes, spacing } from '../Theme/Constants'
+import { spacing } from '../Theme/Constants'
 import { fonts } from '../Theme/Fonts'
 import { ColorUtil } from '../Utility/ColoUtil'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, ViewStyle, StyleSheet, TouchableOpacity } from 'react-native'
 import { colors } from '../../Theme/Colors'
-import { sizes, spacing } from '../../Theme/Constants'
+import { spacing } from '../../Theme/Constants'
 
 interface CardProps {
   onPress?: () => void

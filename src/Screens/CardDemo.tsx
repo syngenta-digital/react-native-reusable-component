@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Alert } from 'react-native'
 import Avatar from '../Components/Avatar/Avatar'
 import Card from '../Components/Card/Card'
 import { colors } from '../Theme/Colors'
-import { sizes, spacing } from '../Theme/Constants'
+import { spacing } from '../Theme/Constants'
 import { fonts } from '../Theme/Fonts'
 
 const CardDemo = () => (
