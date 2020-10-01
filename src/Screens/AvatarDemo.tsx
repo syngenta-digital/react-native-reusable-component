@@ -18,7 +18,7 @@ const AvatarDemo = () => (
     <Avatar
       style={styles.avatarStyle}
       source={{
-        uri: 'http://shorturl.at/suAG5'
+        uri: 'https://rb.gy/overpp'
       }}
     />
   </View>
