@@ -10,14 +10,14 @@ const onPress = (message: any) => {
 const ButtonsDemo = () => (
   <>
     <View style={styles.container}>
-      <Button title='Large Button' onPress={() => onPress('This is Large Button')} />
-      <Button title='Medium Size Button' btnSize='medium' onPress={() => onPress('This is Medium Size Button')} />
       <Button
-        title='Small Size Shadow Button'
+        title='Small Button'
         btnSize='small'
         shadowButton={true}
         onPress={() => onPress('This is Small Size Shadow Button')}
       />
+      <Button title='Medium Size Button' btnSize='medium' onPress={() => onPress('This is Medium Size Button')} />
+      <Button title='Large Button' onPress={() => onPress('This is Large Button')} />
       <Button title='Large Size Disabled Button' disabled={true} onPress={() => {}} />
       <Button
         title='Any Cutom Button'
@@ -37,7 +37,7 @@ export default ButtonsDemo
 const styles = StyleSheet.create({
   container: {
     flex: 2,
-    marginHorizontal: 20,
+    margin: 20,
     justifyContent: 'space-between'
   },
   borderStyle: {

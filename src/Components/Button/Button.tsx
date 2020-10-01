@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   disabledBtnView: {
-    backgroundColor: colors.grey10
+    backgroundColor: colors.grey30
   },
   btnDisabledTxt: {
     color: colors.grey100
