@@ -5,6 +5,7 @@ import CardDemo from '../Screens/CardDemo'
 import ColorDemo from '../Screens/ColorDemo'
 import AvatarDemo from '../Screens/AvatarDemo'
 import LoaderDemo from '../Screens/LoaderDemo'
+import ButtonsDemo from '../Screens/ButtonsDemo'
 
 const Stack = createStackNavigator()
 
@@ -16,6 +17,7 @@ export const AppStack = () => {
       <Stack.Screen name='ColorDemo' component={ColorDemo} />
       <Stack.Screen name='AvatarDemo' component={AvatarDemo} />
       <Stack.Screen name='LoaderDemo' component={LoaderDemo} />
+      <Stack.Screen name='ButtonsDemo' component={ButtonsDemo} />
     </Stack.Navigator>
   )
 }
