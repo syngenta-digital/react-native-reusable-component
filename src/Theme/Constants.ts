@@ -1,4 +1,3 @@
-
 export const sizes = {
   size12: 12,
   size14: 14,

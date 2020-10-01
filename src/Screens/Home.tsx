@@ -5,7 +5,7 @@ import { colors } from '../Theme/Colors'
 import { spacing } from '../Theme/Constants'
 
 //Add proper type for navigation prop
-const HomeScreen = ({ navigation }) => (
+const HomeScreen = ({ navigation }: any) => (
   <View style={styles.container}>
     <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('ColorDemo')}>
       <Text>Color System</Text>
@@ -15,6 +15,9 @@ const HomeScreen = ({ navigation }) => (
     </TouchableOpacity>
     <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('AvatarDemo')}>
       <Text>Avatar Component</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('LoaderDemo')}>
+      <Text>Loader Component</Text>
     </TouchableOpacity>
     <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('ButtonsDemo')}>
       <Text>Button Component</Text>
