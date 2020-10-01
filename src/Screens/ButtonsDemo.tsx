@@ -11,9 +11,9 @@ const ButtonsDemo = () => (
     <View style={styles.container}>
         <Button title='Large Button' onPress={() => onPress('This is Large Button')}/>
         <Button title='Medium Size Border Button' btnSize='medium' onPress={() => onPress('This is Medium Size Border Button')}/>
-        <Button title='Small Size Shadow Button' btnSize='small' shadowButton={true} onPress={() => onPress('This is Small Size Shadow Button')}/>
+        <Button title='Small Button' btnSize='small' shadowButton={true} onPress={() => onPress('This is Small Size Shadow Button')}/>
         <Button title='Large Size Disabled Button' disabled={true} onPress={() => {}}/>
-        <Button title='Any Cutom Button' shadowButton={true} borderStyle={styles.borderStyle} btnStyle={styles.customBtn} textStyle={styles.textStyle}  onPress={() => onPress('This Is User Styles Button')}/>
+        <Button title='Cutom Button' shadowButton={true} borderStyle={styles.borderStyle} btnStyle={styles.customBtn} textStyle={styles.textStyle}  onPress={() => onPress('This Is User Styles Button')}/>
     </View>
 )
 
@@ -22,7 +22,7 @@ export default ButtonsDemo;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginHorizontal: colors.white,
+        marginHorizontal: 20,
         justifyContent: 'space-between'
     },
     borderStyle: {
