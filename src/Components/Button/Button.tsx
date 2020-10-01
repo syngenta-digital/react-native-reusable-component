@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity, Text, View, StyleSheet } from 'react-native'
+import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 import { colors } from '../../Theme/Colors'
-import { SIZES } from '../../Theme/Constants'
 
 interface Props {
 	title?: string;
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
 	container: {
 		width: '100%',
 		borderRadius: 4,
-		height: SIZES(44),
+		height: 44,
 		backgroundColor: colors.green50,
 		justifyContent: 'center',
 		alignItems: 'center',
@@ -101,24 +100,24 @@ const styles = StyleSheet.create({
 	},
 	shadowButton: {
 		elevation: 7,
-		shadowOffset: { width: SIZES(1), height: SIZES(2) },
+		shadowOffset: { width:1, height: 2 },
 		shadowColor: colors.black,
 		shadowOpacity: 0.2,
 		shadowRadius: 2
 	},
 	title: {
 		color: colors.white,
-		fontSize: SIZES(16)
+		fontSize: 16
 	},
 	borderButton: {
 		backgroundColor: colors.white,
 		borderWidth: 1,
 		borderStyle: 'solid',
-		borderColor: 'red'
+		borderColor: colors.red60
 	},
 	borderButtonText: {
-		color: 'red',
-		fontSize: SIZES(16)
+		color: colors.red60,
+		fontSize: 16
 	},
 	disabledBtnView: {
 		backgroundColor: colors.grey10
