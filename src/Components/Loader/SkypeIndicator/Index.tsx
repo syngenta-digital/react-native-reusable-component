@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { View, Animated, Easing, StyleSheet } from 'react-native'
+import { colors } from '../../../Theme/Colors'
 
 import Indicator from './Indicator'
 
@@ -17,7 +18,7 @@ export default class SkypeIndicator extends PureComponent<SkypeIndicatorProps> {
   static defaultProps = {
     animationDuration: 1600,
 
-    color: 'rgb(0, 0, 0)',
+    color: colors.black,
     count: 5,
     size: 40,
 
@@ -107,7 +108,6 @@ const styles = StyleSheet.create({
 
   layer: {
     ...StyleSheet.absoluteFillObject,
-
     justifyContent: 'flex-start',
     alignItems: 'center'
   }
