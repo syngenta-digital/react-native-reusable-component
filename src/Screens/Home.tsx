@@ -16,6 +16,9 @@ const HomeScreen = ({ navigation }: any) => (
     <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('AvatarDemo')}>
       <Text>Avatar Component</Text>
     </TouchableOpacity>
+    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('LoaderDemo')}>
+      <Text>Loader Component</Text>
+    </TouchableOpacity>
   </View>
 )
 export default HomeScreen
