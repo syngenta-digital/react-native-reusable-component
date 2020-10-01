@@ -8,6 +8,7 @@ const onPress = (message: any) => {
 }
 
 const ButtonsDemo = () => (
+    <>
     <View style={styles.container}>
         <Button title='Large Button' onPress={() => onPress('This is Large Button')}/>
         <Button title='Medium Size Border Button' btnSize='medium' onPress={() => onPress('This is Medium Size Border Button')}/>
@@ -15,13 +16,15 @@ const ButtonsDemo = () => (
         <Button title='Large Size Disabled Button' disabled={true} onPress={() => {}}/>
         <Button title='Cutom Button' shadowButton={true} borderStyle={styles.borderStyle} btnStyle={styles.customBtn} textStyle={styles.textStyle}  onPress={() => onPress('This Is User Styles Button')}/>
     </View>
+    <View style={{flex: 1}} />
+    </>
 )
 
 export default ButtonsDemo;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 2,
         marginHorizontal: 20,
         justifyContent: 'space-between'
     },
