@@ -28,7 +28,7 @@ export const fonts = {
     fontSize: sizes.size16
   },
   h4SemiBold: {
-    fontFamily: notoRegular,
+    fontFamily: notoSemiBold,
     fontSize: sizes.size16
   },
   subtitle1: {

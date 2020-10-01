@@ -1,30 +1,10 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import Card from './src/Components/Card/Card'
-import { colors } from './src/Theme/Colors'
-import { sizes } from './src/Theme/Constants'
-import { fonts } from './src/Theme/Fonts'
+import { NavigationContainer } from '@react-navigation/native'
+import { AppStack } from './src/Routes/AppStack'
 
 const App = () => (
-  <View style={styles.container}>
-    <Card
-      children={
-        <View>
-          <Text style={[fonts.body1SemiBold]}>This is a</Text>
-          <Text style={[fonts.h1]}>Card Component</Text>
-        </View>
-      }
-    />
-  </View>
+  <NavigationContainer>
+    <AppStack />
+  </NavigationContainer>
 )
 export default App
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.grey10,
-    paddingHorizontal: sizes.size12
-  }
-})
