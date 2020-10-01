@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import AppLoader from '../Components/Loader/loader'
 import { colors } from '../Theme/Colors'
 import { spacing } from '../Theme/Constants'
