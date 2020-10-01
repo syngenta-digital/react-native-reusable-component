@@ -16,7 +16,7 @@ const colorStyle = (color: string) => {
     marginTop: spacing.space4
   }
 }
-const renderItem = ({ item }) => <Item color={item.hex} title={item.title} />
+const renderItem = ({ item }: any) => <Item color={item.hex} title={item.title} />
 
 const Item = ({ title, color }: IColor) => (
   <View style={styles.item}>
