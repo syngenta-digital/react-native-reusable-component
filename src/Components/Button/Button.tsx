@@ -13,6 +13,8 @@ interface Props {
   borderStyle?: object
   shadowButton?: boolean
   btnSize?: string
+  noTitle?: boolean
+  children?: React.ReactNode[] | React.ReactNode
 }
 
 interface State {}
@@ -41,7 +43,9 @@ export default class Button extends PureComponent<Props, State> {
       borderButton,
       borderStyle,
       shadowButton,
-      btnSize
+      btnSize,
+      children,
+      noTitle
     } = this.props
 
     return (
@@ -58,17 +62,16 @@ export default class Button extends PureComponent<Props, State> {
           ]}
           disabled={disabled}
           onPress={() => onPress()}>
-          <View style={{ flexDirection: 'row' }}>
-            <Text
-              style={[
-                styles.title,
-                borderButton && styles.borderButtonText,
-                disabled && styles.btnDisabledTxt,
-                textStyle
-              ]}>
-              {title}
-            </Text>
-          </View>
+          {!noTitle && <Text
+            style={[
+              styles.title,
+              borderButton && styles.borderButtonText,
+              disabled && styles.btnDisabledTxt,
+              textStyle
+            ]}>
+            {title}
+          </Text>}
+          {children}
         </TouchableOpacity>
       </>
     )
@@ -92,11 +95,12 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     borderRadius: 4,
-    height: 44,
+    minHeight: 44,
     backgroundColor: colors.green50,
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    padding: 5
   },
   shadowButton: {
     elevation: 7,
@@ -107,7 +111,8 @@ const styles = StyleSheet.create({
   },
   title: {
     color: colors.white,
-    fontSize: 16
+    fontSize: 16,
+    textAlign: 'center'
   },
   borderButton: {
     backgroundColor: colors.white,
