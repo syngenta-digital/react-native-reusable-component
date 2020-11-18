@@ -17,14 +17,12 @@ const HomeScreen = ({ navigation }: any) => {
   }
 
   useEffect(() => {
-    console.log('use Effect')
     NetworkStatus.sharedInstance.initiateNetworkListener()
     fetchNetStateFromFetch()
     NetworkStatus.sharedInstance.sendConnectionStatus = (state: any) => {
       setNetState(state)
     }
     return () => {
-      console.log('return call')
       NetworkStatus.sharedInstance.unsubscribeNetworkListener()
     }
   }, [])
@@ -52,7 +50,7 @@ const HomeScreen = ({ navigation }: any) => {
       </TouchableOpacity>
       {/**Show Network connection */}
       {netState && (
-        <Text>
+        <Text style={{ backgroundColor: netState.isConnected ? 'green' : 'red' }}>
           Network Type {netState.type} Connection {netState.isConnected.toString()}
         </Text>
       )}
