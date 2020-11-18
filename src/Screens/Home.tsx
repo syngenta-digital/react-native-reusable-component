@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { AlertType } from '../Components/Alert/AlertComponent'
+import AlertView from '../Components/Alert/AlertView'
 import { colors } from '../Theme/Colors'
 import { spacing } from '../Theme/Constants'
 import NetworkStatus from '../Utility/NetState'
@@ -42,6 +44,13 @@ const HomeScreen = ({ navigation }: any) => {
         <Text>Loader Component</Text>
       </TouchableOpacity>
 
+      {/**Show Simple Alert */}
+      <TouchableOpacity
+        style={styles.btn}
+        onPress={() => AlertView.show('Simple alert Message', AlertType.SUCCESS, 'Thanks')}>
+        <Text>Show Simple Alert</Text>
+      </TouchableOpacity>
+      {/**Show Network connection */}
       {netState && (
         <Text>
           Network Type {netState.type} Connection {netState.isConnected.toString()}
