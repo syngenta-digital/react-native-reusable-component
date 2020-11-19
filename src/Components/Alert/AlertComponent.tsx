@@ -1,5 +1,5 @@
 /**
- * AlertComponent is use to alert on screen, AlertComponent support button actions 
+ * AlertComponent is use to show alert on screen, AlertComponent support button actions 
  * 
  * Title, Message Title, Success button Title/Action , Cancel Button Title/Action
  *
