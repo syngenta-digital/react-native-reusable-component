@@ -52,24 +52,26 @@ export interface AlertProps {
   okTitle: string
   productName?: string
   visible?: boolean
+  successColor?: string
+  errorColor?: string
+  normalColor?: string
 }
 
 class AlertComponent extends React.Component<AlertProps> {
   constructor(props: AlertProps) {
     super(props)
-    this.state = { show: this.props.visible }
   }
 
   showCancelButton = () => this.props.onPressCancel && this.props.cancelTitle
 
   alertStatusColor = () => {
     if (this.props.alertType === undefined || this.props.alertType === AlertType.SUCCESS) {
-      return colors.blue40
+      return this.props.successColor ? this.props.successColor : colors.blue40
     } else {
       if (this.props.alertType === AlertType.ERROR) {
-        return colors.red60
+        return this.props.errorColor ? this.props.errorColor : colors.red60
       } else if (this.props.alertType === AlertType.NONE) {
-        return colors.white
+        return this.props.normalColor ? this.props.normalColor : colors.grey100
       }
       return colors.blue40
     }
@@ -96,37 +98,21 @@ class AlertComponent extends React.Component<AlertProps> {
   render() {
     let useColor = this.alertStatusColor()
     let cancelButtonShow = this.showCancelButton()
-    console.log('cancelButtonShow', cancelButtonShow, !this.props.onPressCancel, !this.props.cancelTitle)
+
     return (
-      <Modal
-        visible={this.props.visible}
-        transparent={true}
-        onShow={() => this.setState({ show: true })}
-        onDismiss={() => this.setState({ show: false })}>
+      <Modal visible={this.props.visible} transparent={true}>
         <View style={alertStyles.container}>
           <View style={alertStyles.popContainer}>
-            <View
-              style={[
-                alertStyles.title,
-                { borderBottomColor: this.props.alertType === AlertType.NONE ? 'transparent' : useColor }
-              ]}>
-              <Text
-                style={[
-                  alertStyles.titleText,
-                  { color: this.props.alertType === AlertType.NONE ? colors.black : useColor }
-                ]}>
-                {this.props.alertTitle}
-              </Text>
+            <View style={[alertStyles.title, { borderBottomColor: useColor }]}>
+              <Text style={[alertStyles.titleText, { color: useColor }]}>{this.props.alertTitle}</Text>
             </View>
 
             <View
-              style={[
-                {
-                  width: '100%',
-                  height: '1%',
-                  backgroundColor: this.props.alertType === AlertType.NONE ? 'transparent' : useColor
-                }
-              ]}
+              style={{
+                width: '100%',
+                height: '1%',
+                backgroundColor: useColor
+              }}
             />
 
             <View style={alertStyles.msgContainer}>
@@ -148,12 +134,7 @@ class AlertComponent extends React.Component<AlertProps> {
                 </View>
               ) : null}
 
-              {this.actionButton(
-                this.props.onPressOk,
-                this.props.okTitle,
-                colors.white,
-                this.props.alertType == AlertType.NONE ? colors.grey20 : useColor
-              )}
+              {this.actionButton(this.props.onPressOk, this.props.okTitle, colors.white, useColor)}
             </View>
           </View>
         </View>
@@ -214,7 +195,6 @@ const alertStyles = StyleSheet.create({
     paddingRight: normalize(10),
     paddingVertical: normalize(10),
     marginTop: normalize(10)
-    // flex: 1,
   },
   popButton: {
     marginRight: '5%'
@@ -223,7 +203,6 @@ const alertStyles = StyleSheet.create({
     width: '100%',
     padding: normalize(10),
     backgroundColor: colors.white
-    // flex: 1,
   },
   msgTextStyle: {
     ...fonts.h4

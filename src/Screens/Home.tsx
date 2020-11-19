@@ -45,7 +45,15 @@ const HomeScreen = ({ navigation }: any) => {
       {/**Show Simple Alert */}
       <TouchableOpacity
         style={styles.btn}
-        onPress={() => AlertView.show('Simple alert Message', AlertType.SUCCESS, 'Thanks')}>
+        onPress={() =>
+          AlertView.show(
+            'Simple alert Message',
+            AlertType.NONE,
+            'Thanks',
+            'Error Title optional',
+            'Success Title Optional'
+          )
+        }>
         <Text>Show Simple Alert</Text>
       </TouchableOpacity>
       {/**Show Network connection */}
