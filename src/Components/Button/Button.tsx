@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity, Text, View, StyleSheet } from 'react-native'
+import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 import { colors } from '../../Theme/Colors'
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
   shadowButton?: boolean
   btnSize?: string
   noTitle?: boolean
-  children?: React.ReactNode[] | React.ReactNode
+  children?: React.ReactNode
 }
 
 interface State {}
@@ -47,13 +47,13 @@ export default class Button extends PureComponent<Props, State> {
       children,
       noTitle
     } = this.props
-
+    let inlineStyle = { width: btnSize === 'small' ? '25%' : btnSize === 'medium' ? '50%' : '100%' }
     return (
       <>
         <TouchableOpacity
           style={[
             styles.container,
-            { width: btnSize === 'small' ? '25%' : btnSize === 'medium' ? '50%' : '100%' },
+            inlineStyle,
             disabled && styles.disabledBtnView,
             shadowButton && styles.shadowButton,
             borderButton ? styles.borderButton : {},
@@ -62,15 +62,17 @@ export default class Button extends PureComponent<Props, State> {
           ]}
           disabled={disabled}
           onPress={() => onPress()}>
-          {!noTitle && <Text
-            style={[
-              styles.title,
-              borderButton && styles.borderButtonText,
-              disabled && styles.btnDisabledTxt,
-              textStyle
-            ]}>
-            {title}
-          </Text>}
+          {!noTitle && (
+            <Text
+              style={[
+                styles.title,
+                borderButton && styles.borderButtonText,
+                disabled && styles.btnDisabledTxt,
+                textStyle
+              ]}>
+              {title}
+            </Text>
+          )}
           {children}
         </TouchableOpacity>
       </>
