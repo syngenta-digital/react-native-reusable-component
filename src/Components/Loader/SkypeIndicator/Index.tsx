@@ -45,7 +45,7 @@ export default class SkypeIndicator extends PureComponent<SkypeIndicatorProps> {
   renderComponent(
     index: number,
     count: number,
-    progress: { interpolate: (arg0: { inputRange: number[] | number[]; outputRange: string[] | number[] }) => any }
+    progress: { interpolate: (arg0: { inputRange: number[]; outputRange: string[] | number[] }) => any }
   ) {
     let { size, color: backgroundColor, animationDuration } = this.props
     let minScale = 0.2
