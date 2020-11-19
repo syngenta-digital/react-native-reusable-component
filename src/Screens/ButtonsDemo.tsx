@@ -20,7 +20,7 @@ const ButtonsDemo = () => (
       <Button title='Medium Size Button' btnSize='medium' onPress={() => onPress('This is Medium Size Button')} />
       <Button
         title='Shadow Button'
-        borderStyle={{ borderColor: 'darkgreen', borderWidth: 2 }}
+        borderStyle={styles.borderButton}
         shadowButton={true}
         btnSize='medium'
         onPress={() => onPress('This is Medium Size Shadow Button')}
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     borderColor: colors.blue50,
     borderStyle: 'solid'
   },
+  borderButton: { borderColor: 'darkgreen', borderWidth: 2 },
   customBtn: {
     width: '75%',
     backgroundColor: colors.white

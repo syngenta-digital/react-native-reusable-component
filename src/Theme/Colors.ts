@@ -5,6 +5,9 @@ export const colors = {
 
   white: '#ffffff',
   black: '#000000',
+  blackOpacity2: 'rgba(0,0,0,0.2)',
+  blackOpacity3: 'rgba(0,0,0,0.3)',
+  blackOpacity6: 'rgba(0,0,0,0.7)',
 
   blue10: '#EAF6FF',
   blue20: '#C6E6FF',
