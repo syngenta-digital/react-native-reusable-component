@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity, Text, View, StyleSheet } from 'react-native'
+import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 import { colors } from '../../Theme/Colors'
 
 interface Props {
@@ -17,52 +17,35 @@ interface Props {
   children?: React.ReactNode[] | React.ReactNode
 }
 
-interface State {}
-
-export default class Button extends PureComponent<Props, State> {
-  static propTypes: {
-    title: PropTypes.Validator<string>
-    onPress: PropTypes.Validator<(...args: any[]) => any>
-  }
-  static defaultProps: {
-    title: string
-    disabled?: boolean
-    borderButton?: boolean
-    onPress: () => void
-    shadowButton?: boolean
-    btnSize?: string
-  }
-
-  render() {
-    const {
-      title,
-      onPress,
-      btnStyle,
-      disabled,
-      textStyle,
-      borderButton,
-      borderStyle,
-      shadowButton,
-      btnSize,
-      children,
-      noTitle
-    } = this.props
-
-    return (
-      <>
-        <TouchableOpacity
-          style={[
-            styles.container,
-            { width: btnSize === 'small' ? '25%' : btnSize === 'medium' ? '50%' : '100%' },
-            disabled && styles.disabledBtnView,
-            shadowButton && styles.shadowButton,
-            borderButton ? styles.borderButton : {},
-            borderStyle,
-            btnStyle
-          ]}
-          disabled={disabled}
-          onPress={() => onPress()}>
-          {!noTitle && <Text
+const Button = ({
+  title,
+  onPress,
+  btnStyle,
+  disabled,
+  textStyle,
+  borderButton,
+  borderStyle,
+  shadowButton,
+  btnSize,
+  children,
+  noTitle
+}: Props) => {
+  return (
+    <>
+      <TouchableOpacity
+        style={[
+          styles.container,
+          { width: btnSize === 'small' ? '25%' : btnSize === 'medium' ? '50%' : '100%' },
+          disabled && styles.disabledBtnView,
+          shadowButton && styles.shadowButton,
+          borderButton ? styles.borderButton : {},
+          borderStyle,
+          btnStyle
+        ]}
+        disabled={disabled}
+        onPress={() => onPress()}>
+        {!noTitle && (
+          <Text
             style={[
               styles.title,
               borderButton && styles.borderButtonText,
@@ -70,13 +53,15 @@ export default class Button extends PureComponent<Props, State> {
               textStyle
             ]}>
             {title}
-          </Text>}
-          {children}
-        </TouchableOpacity>
-      </>
-    )
-  }
+          </Text>
+        )}
+        {children}
+      </TouchableOpacity>
+    </>
+  )
 }
+
+export default Button
 
 Button.propTypes = {
   title: PropTypes.string.isRequired,
