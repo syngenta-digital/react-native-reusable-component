@@ -6,6 +6,7 @@ import ColorDemo from '../Screens/ColorDemo'
 import AvatarDemo from '../Screens/AvatarDemo'
 import LoaderDemo from '../Screens/LoaderDemo'
 import ButtonsDemo from '../Screens/ButtonsDemo'
+import PhoneFieldWithCountryPickerDemo from '../Screens/PhoneFieldWithCountryPickerDemo'
 
 const Stack = createStackNavigator()
 
@@ -18,6 +19,7 @@ export const AppStack = () => {
       <Stack.Screen name='AvatarDemo' component={AvatarDemo} />
       <Stack.Screen name='LoaderDemo' component={LoaderDemo} />
       <Stack.Screen name='ButtonsDemo' component={ButtonsDemo} />
+      <Stack.Screen name='PhoneFieldWithCountryPickerDemo' component={PhoneFieldWithCountryPickerDemo} />
     </Stack.Navigator>
   )
 }

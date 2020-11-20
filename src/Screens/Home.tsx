@@ -41,6 +41,9 @@ const HomeScreen = ({ navigation }: any) => {
       <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('LoaderDemo')}>
         <Text>Loader Component</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('PhoneFieldWithCountryPickerDemo')}>
+        <Text>Country Picker Component</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('ButtonsDemo')}>
         <Text>Button Component</Text>
