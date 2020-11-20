@@ -1,12 +1,14 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { StyleSheet, Text } from 'react-native'
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { colors } from '../Theme/Colors'
 import { spacing } from '../Theme/Constants'
 
 //Add proper type for navigation prop
+const text = (value: any) => <Text style={styles.title}>{value}</Text>
+
 const HomeScreen = ({ navigation }: any) => (
-  <View style={styles.container}>
+  <ScrollView style={styles.container} contentContainerStyle={styles.content}>
     <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('ColorDemo')}>
       <Text>Color System</Text>
     </TouchableOpacity>
@@ -25,14 +27,22 @@ const HomeScreen = ({ navigation }: any) => (
     <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('ListViewDemo')}>
       <Text>List View Component</Text>
     </TouchableOpacity>
-  </View>
+    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('SliderDemo')}>
+      {text('Animated Area Component')}
+    </TouchableOpacity>
+  </ScrollView>
 )
 export default HomeScreen
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center'
+    paddingBottom: 40
+  },
+  content: {
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   btn: {
     width: 150,
@@ -41,5 +51,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.cropwise_green
+  },
+  title: {
+    textAlign: 'center'
   }
 })

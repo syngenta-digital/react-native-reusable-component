@@ -7,6 +7,7 @@ import AvatarDemo from '../Screens/AvatarDemo'
 import LoaderDemo from '../Screens/LoaderDemo'
 import ButtonsDemo from '../Screens/ButtonsDemo'
 import ListViewDemo from '../Screens/ListViewDemo'
+import SliderDemo from '../Screens/SliderDemo'
 
 const Stack = createStackNavigator()
 
@@ -20,6 +21,7 @@ export const AppStack = () => {
       <Stack.Screen name='LoaderDemo' component={LoaderDemo} />
       <Stack.Screen name='ButtonsDemo' component={ButtonsDemo} />
       <Stack.Screen name='ListViewDemo' component={ListViewDemo} />
+      <Stack.Screen name='SliderDemo' component={SliderDemo} />
     </Stack.Navigator>
   )
 }
