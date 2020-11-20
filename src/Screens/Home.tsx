@@ -48,6 +48,9 @@ const HomeScreen = ({ navigation }: any) => {
       <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('ButtonsDemo')}>
         <Text>Button Component</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('ListViewDemo')}>
+        <Text>List View Component</Text>
+      </TouchableOpacity>
       {/**Show Simple Alert */}
       <TouchableOpacity
         style={styles.btn}
