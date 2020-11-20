@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Alert, Text } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import Button from '../Components/Button/Button'
+import CustomButton from '../Components/Button/Button'
 import { colors } from '../Theme/Colors'
 
 const onPress = (message: any) => {
@@ -11,23 +11,23 @@ const onPress = (message: any) => {
 const ButtonsDemo = () => (
   <>
     <ScrollView contentContainerStyle={styles.container}>
-      <Button
+      <CustomButton
         title='Small Button'
         btnSize='small'
         shadowButton={true}
         onPress={() => onPress('This is Small Size Shadow Button')}
       />
-      <Button title='Medium Size Button' btnSize='medium' onPress={() => onPress('This is Medium Size Button')} />
-      <Button
+      <CustomButton title='Medium Size Button' btnSize='medium' onPress={() => onPress('This is Medium Size Button')} />
+      <CustomButton
         title='Shadow Button'
         borderStyle={styles.borderView}
         shadowButton={true}
         btnSize='medium'
         onPress={() => onPress('This is Medium Size Shadow Button')}
       />
-      <Button title='Disabled Button' btnSize='medium' disabled={true} onPress={() => {}} />
-      <Button title='Large Button' onPress={() => onPress('This is Large Button')} />
-      <Button
+      <CustomButton title='Disabled Button' btnSize='medium' disabled={true} onPress={() => {}} />
+      <CustomButton title='Large Button' onPress={() => onPress('This is Large Button')} />
+      <CustomButton
         noTitle={true}
         shadowButton={true}
         borderStyle={styles.borderStyle}
@@ -36,7 +36,7 @@ const ButtonsDemo = () => (
         onPress={() => onPress('This Is User Styles Button')}>
         <Text style={styles.textStyle}>Custom Style Button</Text>
         <Text style={styles.textStyle}>No. of Children Can Be Passed..</Text>
-      </Button>
+      </CustomButton>
     </ScrollView>
   </>
 )

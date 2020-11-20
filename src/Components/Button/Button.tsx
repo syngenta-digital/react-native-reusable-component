@@ -17,7 +17,7 @@ interface Props {
   children?: React.ReactNode[] | React.ReactNode
 }
 
-const Button = ({
+const CustomButton = ({
   title,
   onPress,
   btnStyle,
@@ -62,13 +62,13 @@ const Button = ({
   )
 }
 
-export default Button
+export default CustomButton
 
-Button.propTypes = {
+CustomButton.propTypes = {
   title: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired
 }
-Button.defaultProps = {
+CustomButton.defaultProps = {
   title: 'BorderButton',
   disabled: false,
   borderButton: false,
