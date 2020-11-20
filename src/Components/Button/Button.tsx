@@ -14,7 +14,7 @@ interface Props {
   shadowButton?: boolean
   btnSize?: string
   noTitle?: boolean
-  children?: React.ReactNode[] | React.ReactNode
+  children?: React.ReactNode
 }
 
 const CustomButton = ({

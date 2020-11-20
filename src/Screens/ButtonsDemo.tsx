@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     borderColor: colors.blue50,
     borderStyle: 'solid'
   },
+  borderButton: { borderColor: 'darkgreen', borderWidth: 2 },
   customBtn: {
     width: '75%',
     backgroundColor: colors.white
