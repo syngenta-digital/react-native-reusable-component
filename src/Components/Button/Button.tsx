@@ -17,7 +17,7 @@ interface Props {
   children?: React.ReactNode
 }
 
-const Button = ({
+const CustomButton = ({
   title,
   onPress,
   btnStyle,
@@ -35,6 +35,7 @@ const Button = ({
       <TouchableOpacity
         style={[
           styles.container,
+          // eslint-disable-next-line react-native/no-inline-styles
           { width: btnSize === 'small' ? '25%' : btnSize === 'medium' ? '50%' : '100%' },
           disabled && styles.disabledBtnView,
           shadowButton && styles.shadowButton,
@@ -61,13 +62,13 @@ const Button = ({
   )
 }
 
-export default Button
+export default CustomButton
 
-Button.propTypes = {
+CustomButton.propTypes = {
   title: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired
 }
-Button.defaultProps = {
+CustomButton.defaultProps = {
   title: 'BorderButton',
   disabled: false,
   borderButton: false,

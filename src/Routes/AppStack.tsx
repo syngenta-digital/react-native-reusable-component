@@ -8,6 +8,7 @@ import LoaderDemo from '../Screens/LoaderDemo'
 import ButtonsDemo from '../Screens/ButtonsDemo'
 import PhoneFieldWithCountryPickerDemo from '../Screens/PhoneFieldWithCountryPickerDemo'
 import ListViewDemo from '../Screens/ListViewDemo'
+import SliderDemo from '../Screens/SliderDemo'
 
 const Stack = createStackNavigator()
 
@@ -22,6 +23,7 @@ export const AppStack = () => {
       <Stack.Screen name='ButtonsDemo' component={ButtonsDemo} />
       <Stack.Screen name='PhoneFieldWithCountryPickerDemo' component={PhoneFieldWithCountryPickerDemo} />
       <Stack.Screen name='ListViewDemo' component={ListViewDemo} />
+      <Stack.Screen name='SliderDemo' component={SliderDemo} />
     </Stack.Navigator>
   )
 }
