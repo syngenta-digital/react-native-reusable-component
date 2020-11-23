@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, Text } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native'
+
 import { AlertType } from '../Components/Alert/AlertComponent'
 import AlertView from '../Components/Alert/AlertView'
+
 import { colors } from '../Theme/Colors'
 import { spacing } from '../Theme/Constants'
 import NetworkStatus from '../Utility/NetState'
@@ -30,7 +31,7 @@ const HomeScreen = ({ navigation }: any) => {
   const text = (value: string) => <Text>{value}</Text>
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.container}>
       <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('ColorDemo')}>
         <Text>Color System</Text>
       </TouchableOpacity>
@@ -73,14 +74,16 @@ const HomeScreen = ({ navigation }: any) => {
           Network Type {netState.type} Connection {netState.isConnected.toString()}
         </Text>
       )}
-    </View>
+    </ScrollView>
   )
 }
 export default HomeScreen
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingBottom: 40
   },
   content: {
@@ -89,8 +92,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   btn: {
-    width: 150,
-    height: 50,
+    minWidth: 150,
+    minHeight: 50,
     marginVertical: spacing.space16,
     justifyContent: 'center',
     alignItems: 'center',
