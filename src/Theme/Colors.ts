@@ -107,5 +107,10 @@ export const colors = {
   grey70: '#4D5165',
   grey80: '#363948',
   grey90: '#232630',
-  grey100: '#14151C'
+  grey100: '#14151C',
+
+  damageRed: '#F74141',
+  blue: '#00A0BE',
+  yellow: '#F9C43D',
+  gray1: '#2F3031'
 }
