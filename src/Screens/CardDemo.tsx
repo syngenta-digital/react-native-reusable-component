@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Alert } from 'react-native'
 import AlertComponent, { AlertType } from '../Components/Alert/AlertComponent'
 import Avatar from '../Components/Avatar/Avatar'
 import Card from '../Components/Card/Card'
+import PropertyCard from '../Components/Card/PropertyCard'
 import OrganizationCard from '../Components/OrgCard/OrgCard'
 import { colors } from '../Theme/Colors'
 import { spacing } from '../Theme/Constants'
@@ -42,6 +43,21 @@ const CardDemo = () => {
         }
       />
 
+      <PropertyCard
+        propertyName={'Property Card'}
+        fieldsCount={12}
+        totalArea={79}
+        areaUnit='ha'
+        lastUpdated={new Date()}
+        onEditPress={() => {
+          setValues({ showAlertOnScreen: true, showUserName: 'Property Edit' })
+        }}
+        onEnterPress={() => {
+          setValues({ showAlertOnScreen: true, showUserName: 'Property Enter' })
+        }}
+        onPress={() => {
+          setValues({ showAlertOnScreen: true, showUserName: 'PropertyCard Component' })
+        }} />
       <OrganizationCard
         org={org}
         DEFAULT_CROP_ICON_NAME={'settings'}
