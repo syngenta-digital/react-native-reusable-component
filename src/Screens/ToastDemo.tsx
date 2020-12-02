@@ -1,22 +1,24 @@
 import React from 'react'
-import { StyleSheet, ScrollView } from 'react-native'
+import { StyleSheet, ScrollView, ToastAndroid } from 'react-native'
 import Button from '../Components/Button/Button'
-import CustomToast from '../Components/Toast/CustomToast'
+// import CustomToast from '../Components/Toast/CustomToast'
 
-export default class ToastsDemo extends React.Component {
-  render() {
-    return (
-      <ScrollView contentContainerStyle={styles.container}>
-        <Button
-          title='Small Button'
-          btnSize='small'
-          shadowButton={true}
-          onPress={() => CustomToast.show('This is a toast demo')}
-        />
-      </ScrollView>
-    )
-  }
-}
+const ToastDemo = () => (
+  <>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Button
+        title='Toast Demo Button'
+        btnSize='small'
+        shadowButton={true}
+        onPress={() => {
+          ToastAndroid.show('This is a sample toast demo', 100)
+        }}
+      />
+    </ScrollView>
+  </>
+)
+
+export default ToastDemo
 
 const styles = StyleSheet.create({
   container: {
