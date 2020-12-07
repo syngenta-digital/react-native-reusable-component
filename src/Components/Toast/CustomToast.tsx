@@ -47,7 +47,7 @@ export default class CustomToast extends React.Component<CustomToastProps, Custo
     }, 50)
   }
 
-  ShowToast(message: any, alertType: string, duration: number = 2000) {
+  showToast(message: any, alertType: string, duration: number = 2000) {
     this.setState({ showToast: true, message, alertType }, () => {
       Animated.timing(this.animateOpacityValue, {
         toValue: -40,

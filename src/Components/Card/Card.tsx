@@ -7,10 +7,11 @@ interface CardProps {
   onPress?: () => void
   style?: ViewStyle
   children: React.ReactNode[] | React.ReactNode
+  disabled?: boolean
 }
 
-const Card = ({ onPress, children, style }: CardProps) => (
-  <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
+const Card = ({ onPress, children, style, disabled }: CardProps) => (
+  <TouchableOpacity disabled={disabled} style={[styles.container, style]} onPress={onPress}>
     <View>{children}</View>
   </TouchableOpacity>
 )

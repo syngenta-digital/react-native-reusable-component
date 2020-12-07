@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Alert } from 'react-native'
 import AlertComponent, { AlertType } from '../Components/Alert/AlertComponent'
 import Avatar from '../Components/Avatar/Avatar'
 import Card from '../Components/Card/Card'
+import PropertyCard from '../Components/Card/PropertyCard'
+import OrganizationCard from '../Components/OrgCard/OrgCard'
 import { colors } from '../Theme/Colors'
 import { spacing } from '../Theme/Constants'
 import { fonts } from '../Theme/Fonts'
 
 const CardDemo = () => {
   const [showValues, setValues] = useState({ showAlertOnScreen: false, showUserName: '' })
-
-  console.log('showAlertOnScreen', showValues.showAlertOnScreen)
-
+  let org = { name: 'Org Name', detailDownloaded: true, isDownloaded: true, seasons: [{ name: 'seasons data' }] }
   return (
     <View style={styles.container}>
       <Card
@@ -41,6 +41,35 @@ const CardDemo = () => {
             <Text style={[fonts.body1SemiBold, { marginLeft: spacing.space16 }]}> Usina Zamioculca</Text>
           </View>
         }
+      />
+
+      <PropertyCard
+        propertyName={'Property Card'}
+        fieldsCount={12}
+        totalArea={79}
+        areaUnit='ha'
+        lastUpdated={new Date()}
+        onEditPress={() => {
+          setValues({ showAlertOnScreen: true, showUserName: 'Property Edit' })
+        }}
+        onEnterPress={() => {
+          setValues({ showAlertOnScreen: true, showUserName: 'Property Enter' })
+        }}
+        onPress={() => {
+          setValues({ showAlertOnScreen: true, showUserName: 'PropertyCard Component' })
+        }}
+      />
+      <OrganizationCard
+        org={org}
+        DEFAULT_CROP_ICON_NAME={'settings'}
+        orgDownloadTxt='Work Offline'
+        isDownloaded={true}
+        cropsLength={10}
+        syncMsgText='Sync successfully completed'
+        propertiesTitle='Properties'
+        bottomText='Access Organization'
+        cropsArray={['settings', 'settings', 'settings', 'settings']}
+        onCardClick={() => Alert.alert('Top card clicked..!!')}
       />
 
       <AlertComponent
