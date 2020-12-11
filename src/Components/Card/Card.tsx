@@ -12,7 +12,7 @@ interface CardProps {
 
 const Card = ({ onPress, children, style, disabled }: CardProps) => (
   <TouchableOpacity disabled={disabled} style={[styles.container, style]} onPress={onPress}>
-    <View>{children}</View>
+    <>{children}</>
   </TouchableOpacity>
 )
 export default Card
