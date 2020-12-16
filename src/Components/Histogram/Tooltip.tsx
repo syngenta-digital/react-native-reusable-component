@@ -1,15 +1,14 @@
 import React from 'react'
 
 import { isTablet } from 'react-native-device-info'
-import { BarChart, XAxis, YAxis, Grid } from 'react-native-svg-charts'
-import Svg, { G, Rect, Text as SvgText } from 'react-native-svg'
+import { G, Rect, Text as SvgText } from 'react-native-svg'
 
-import { SIZES, fontFamily } from '../../Assets/Font'
+import { SIZES } from '../../Assets/Font'
 import { colors } from '../../Theme/Colors'
 import { sizes } from '../../Theme/Constants'
 
-const Tooltip = ({ x, y, yMax, total, selected }: any) => {
-  let areaValue = selected.value || 0
+const Tooltip = ({ x, y, yMax, total, selected, areaUnit, areaLable, fontFamilyName }: any) => {
+  let areaValue = selected?.value
   let renderAreaOnTooltip = areaValue
   let percentageValue = ((areaValue / total) * 100).toFixed(2)
   let textXPosition = selected.index >= 6 ? (Number(renderAreaOnTooltip) > 1000 ? SIZES(-15) : SIZES(-5)) : SIZES(16)
@@ -31,8 +30,8 @@ const Tooltip = ({ x, y, yMax, total, selected }: any) => {
       <Rect
         height={SIZES(50)}
         width={Number(renderAreaOnTooltip) > 1000 ? SIZES(125) : SIZES(100)}
-        stroke={'grey'}
-        fill={'white'}
+        stroke={colors.gray1}
+        fill={colors.white}
         ry={10}
         rx={10}
         x={selected.index >= 6 ? (Number(renderAreaOnTooltip) > 1000 ? SIZES(-30) : SIZES(-15)) : SIZES(5)}
@@ -41,16 +40,16 @@ const Tooltip = ({ x, y, yMax, total, selected }: any) => {
         x={textXPosition}
         dy={SIZES(20)}
         textAnchor={'start'}
-        fontFamily={fontFamily.notosans_regular}
+        fontFamily={fontFamilyName}
         fill={colors.gray1}
         fontSize={sizes.size12}>
-        {`${'LocalizedStrings.area()' + ' ' + renderAreaOnTooltip}` + ' ' + ' this.props.areaUnit'}
+        {`${areaLable + ' ' + renderAreaOnTooltip}` + ' ' + areaUnit}
       </SvgText>
       <SvgText
         x={textXPosition}
         dy={SIZES(37)}
         textAnchor={'start'}
-        fontFamily={fontFamily.notosans_regular}
+        fontFamily={fontFamilyName}
         fill={colors.gray1}
         fontSize={sizes.size12}>
         {`${percentageValue} %`}
@@ -68,7 +67,7 @@ const Tooltip = ({ x, y, yMax, total, selected }: any) => {
           }
           y={SIZES(2)}
           transform='rotate(-45)'>
-          <Rect height={SIZES(10)} width={SIZES(10)} fill='white' />
+          <Rect height={SIZES(10)} width={SIZES(10)} fill={colors.white} />
         </G>
       ) : (
         <G
@@ -83,7 +82,7 @@ const Tooltip = ({ x, y, yMax, total, selected }: any) => {
               : SIZES(22)
           }
           y={SIZES(42)}>
-          <Rect height={SIZES(10)} width={SIZES(10)} fill='white' />
+          <Rect height={SIZES(10)} width={SIZES(10)} fill={colors.white} />
         </G>
       )}
     </G>
