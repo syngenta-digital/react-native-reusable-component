@@ -6,6 +6,7 @@ import { colors } from '../../Theme/Colors'
 import Icon from 'react-native-vector-icons/EvilIcons'
 import Card from '../Card/Card'
 import RenderSyncIcon from './SyncIcon'
+import { formatDate } from '../../Utility/DatFormat'
 
 interface SeasonsCardProps {
   onEdit: (data?: any) => void
@@ -150,8 +151,8 @@ SeasonsCard.defaultProps = {
   deleteTitle: 'Delete',
   syncStatus: 'none',
   onEdit: () => Alert.alert('Warning', 'Add Edit function'),
-  startDate: new Date().getUTCDate() + '/' + new Date().getMonth() + '/' + new Date().getFullYear(),
-  endDate: new Date().getUTCDate() + '/' + new Date().getMonth() + '/' + new Date().getFullYear()
+  startDate: formatDate(new Date(), 'DD/MM/YYYY'),
+  endDate: formatDate(new Date(), 'DD/MM/YYYY')
 }
 
 const styles = StyleSheet.create({
