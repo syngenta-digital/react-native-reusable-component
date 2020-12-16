@@ -182,6 +182,10 @@ const OrganizationCard = ({ ...props }: OrganizationCardProps) => {
   )
 }
 
+OrganizationCard.defaultProps = {
+  DEFAULT_CROP_ICON_NAME: 'settings'
+}
+
 const OrganizationCardStyles = StyleSheet.create({
   titleView: {
     flexDirection: 'row',
