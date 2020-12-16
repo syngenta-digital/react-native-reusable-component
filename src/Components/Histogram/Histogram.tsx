@@ -1,18 +1,19 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { Component, useState } from 'react'
-import { View, TouchableOpacity, Text, StyleSheet, Animated, Easing } from 'react-native'
+import React, { useState } from 'react'
+import { View, TouchableOpacity, Text, StyleSheet, ViewStyle } from 'react-native'
 import PropTypes from 'prop-types'
 
 import SliderArea from '../SliderArea/SliderArea'
-import Icon from 'react-native-vector-icons/EvilIcons'
+import Tooltip from './Tooltip'
+
 import { colors } from '../../Theme/Colors'
 import { fontFamily, sizes, SIZES } from '../../Assets/Font'
 
 import { BarChart, XAxis, YAxis, Grid } from 'react-native-svg-charts'
-import Svg, { G, Rect, Text as SvgText } from 'react-native-svg'
+import Svg, { G, Text as SvgText } from 'react-native-svg'
 import LinearGradient from 'react-native-linear-gradient'
+import Icon from 'react-native-vector-icons/EvilIcons'
 import { isTablet } from 'react-native-device-info'
-import Tooltip from './Tooltip'
 
 interface Props {
   totalHistogramArea: number | string
@@ -23,12 +24,17 @@ interface Props {
   datax: Array<any>
   graphData: Array<any>
   yMax: any
-  noGraphTextStyle: any
+  noGraphTextStyle?: any
   noGraphData?: string | ''
   highTitle?: string | 'High'
   lowTitle?: string | 'Low'
   children?: React.ReactNode
   gradientColorsArray: Array<any> | []
+  barchartAreaStyle?: ViewStyle
+  sliderAreaStyle?: ViewStyle
+  animatedViewStyle?: ViewStyle
+  graphContainerStyle?: ViewStyle
+  fontFamilyName?: string
 }
 
 interface areaLableProps {
@@ -36,9 +42,17 @@ interface areaLableProps {
   areaLable: string
   areaLableContainer?: any
   svgViewBox?: any
+  fontFamilyName?: string
 }
 
-export const RenderAreaLabel = ({ areaUnit, areaLable, areaLableContainer, svgViewBox }: areaLableProps) => {
+//Lable of Y-Axis
+export const RenderAreaLabel = ({
+  areaUnit,
+  areaLable,
+  areaLableContainer,
+  svgViewBox,
+  fontFamilyName
+}: areaLableProps) => {
   return (
     <View style={[StyleSheet.absoluteFill, { justifyContent: 'flex-start', left: -5 }, areaLableContainer]}>
       <Svg height='100%' width='6%' viewBox={svgViewBox || isTablet() ? '0 -8 60 65' : '0 -40 30 140'}>
@@ -49,7 +63,7 @@ export const RenderAreaLabel = ({ areaUnit, areaLable, areaLableContainer, svgVi
             alignmentBaseline={'text-bottom'}
             textAnchor={'end'}
             fontSize={SIZES(20)}
-            fontFamily={fontFamily.notosans_regular}
+            fontFamily={fontFamilyName || fontFamily.notosans_regular}
             fill={'white'}>
             {areaUnit ? `${areaLable + ' ('}` + areaUnit + ')' : areaLable}
           </SvgText>
@@ -74,10 +88,34 @@ const Histogram = ({
   datax,
   areaUnit,
   areaLable,
-  gradientColorsArray
+  gradientColorsArray,
+  sliderAreaStyle,
+  graphContainerStyle,
+  animatedViewStyle,
+  fontFamilyName,
+  barchartAreaStyle
 }: Props & areaLableProps) => {
   let refSlideArea: any
   const [selected, setselectedValue] = useState({})
+
+  const handlePress = (index: any, value: any) => {
+    let newValue =
+      selected?.value === value && selected?.index === index
+        ? {}
+        : {
+            index,
+            value
+          }
+    setselectedValue(newValue)
+  }
+
+  const processedData = graphData.map((element: any, index: any) => {
+    element.svg.onPress = () => handlePress(index, element.value)
+    element.bin_edge = index / 10
+    element.key = `data-${index}`
+    return element
+  }) // Add click event to every bar of graph
+
   return (
     <View style={styles.container}>
       <View style={styles.histo_info}>
@@ -92,7 +130,7 @@ const Histogram = ({
             {histogramText}
           </Text>
           <Icon
-            name='arrowright'
+            name='arrow-up'
             style={{
               transform: [{ rotate: refSlideArea?.state?.visibility ? '90deg' : '-90deg' }],
               marginHorizontal: SIZES(5),
@@ -116,13 +154,13 @@ const Histogram = ({
 
       <SliderArea
         ref={(ref: any) => (refSlideArea = ref)}
-        maxHeight={SIZES(250)}
-        containerStyle={{ backgroundColor: 'transparent' }}
-        animationStyle={{ flex: 1, width: '100%' }}>
+        maxHeight={chartBgHeight}
+        containerStyle={[{ backgroundColor: 'transparent' }, sliderAreaStyle]}
+        animationStyle={[styles.animatedView, animatedViewStyle]}>
         {graphData.length ? (
           <>
             <RenderAreaLabel areaUnit={areaUnit} areaLable={areaLable} />
-            <View style={{ flexDirection: 'row', left: SIZES(20) }}>
+            <View style={[styles.graphContainer, graphContainerStyle]}>
               <YAxis
                 data={dataY}
                 numberOfTicks={2}
@@ -130,22 +168,33 @@ const Histogram = ({
                 svg={{ fontSize: sizes.size12, fill: colors.white }}
                 formatLabel={(value: any) => `${value}`}
               />
-              <View style={{ flex: 1, left: SIZES(-20) }}>
+              <View style={[styles.graphArea, barchartAreaStyle]}>
                 <BarChart
-                  style={{ height: isTablet() ? SIZES(250) : SIZES(200), marginHorizontal: SIZES(25) }}
-                  data={graphData}
+                  style={styles.chartStyle}
+                  data={processedData}
                   spacingInner={0}
                   spacingOuter={0}
                   svg={{
                     stroke: colors.gray3,
                     strokeWidth: 1
                   }}
-                  yMax={yMax || 0}
+                  yMax={yMax}
                   yAccessor={({ item }: any) => item.value}
                   contentInset={{ top: SIZES(20), bottom: 0 }}
                   numberOfTicks={dataY.length}>
                   <Grid svg={{ stroke: colors.gray3 }} />
-                  {!!Object.keys(graphData[1]).length && <Tooltip yMax total={totalHistogramArea} selected />}
+                  {!!Object.keys(selected).length && (
+                    <Tooltip
+                      x
+                      y
+                      yMax={yMax}
+                      total={totalHistogramArea}
+                      selected={selected}
+                      areaUnit={areaUnit}
+                      areaLable={areaLable}
+                      fontFamilyName={fontFamilyName || fontFamily.notosans_regular}
+                    />
+                  )}
                 </BarChart>
                 <XAxis
                   style={{
@@ -194,6 +243,10 @@ Histogram.defaultProps = {
   areaLable: '',
   areaUnit: '',
   gradientColorsArray: [colors.damageRed, colors.yellow, '#ABB926', colors.green90]
+}
+
+RenderAreaLabel.defaultProps = {
+  areaUnit: ''
 }
 
 export default Histogram
@@ -249,5 +302,12 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   noGraphText: { alignSelf: 'center', color: colors.white, fontSize: 16 },
-  noDataView: { flex: 1, justifyContent: 'center', alignItems: 'center' }
+  noDataView: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  chartStyle: {
+    height: isTablet() ? SIZES(250) : SIZES(200),
+    marginHorizontal: SIZES(25)
+  },
+  graphArea: { flex: 1, left: SIZES(-20) },
+  animatedView: { flex: 1, width: '100%' },
+  graphContainer: { flexDirection: 'row', left: SIZES(20) }
 })
