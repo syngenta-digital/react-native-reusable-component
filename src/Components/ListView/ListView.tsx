@@ -22,7 +22,7 @@ const ListView = ({ list }: ListViewProps) => (
         <View style={[styles.card, item.contentStyle]}>
           {!item.hideLeftIcon && (
             <View style={[styles.leftIconView, item.leftIconViewStyle]}>
-              <Icon name={'chevron-right'} color={item.leftIconColor || colors.grey60} size={24} />
+              <Icon name={item.leftIconName || 'chevron-right'} color={item.leftIconColor || colors.grey60} size={24} />
             </View>
           )}
           <View style={[styles.detailView, item.detailsStyle]}>
@@ -33,7 +33,7 @@ const ListView = ({ list }: ListViewProps) => (
           </View>
           {!item.hideRightIcon && (
             <View style={[styles.rightIconView, item.rightIconViewStyle]}>
-              <Icon name='calendar' color={item.rightIconColor || colors.grey40} size={20} />
+              <Icon name={item.rightIconName || 'calendar'} color={item.rightIconColor || colors.grey40} size={20} />
             </View>
           )}
         </View>
