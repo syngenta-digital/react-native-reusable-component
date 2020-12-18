@@ -5,7 +5,6 @@ import { G, Rect, Text as SvgText } from 'react-native-svg'
 
 import { SIZES } from '../../Assets/Font'
 import { colors } from '../../Theme/Colors'
-import { sizes } from '../../Theme/Constants'
 
 const Tooltip = ({ x, y, yMax, total, selected, areaUnit, areaLable, fontFamilyName }: any) => {
   let areaValue = selected?.value
@@ -42,7 +41,7 @@ const Tooltip = ({ x, y, yMax, total, selected, areaUnit, areaLable, fontFamilyN
         textAnchor={'start'}
         fontFamily={fontFamilyName}
         fill={colors.gray1}
-        fontSize={sizes.size12}>
+        fontSize={SIZES(12)}>
         {`${areaLable + ' ' + renderAreaOnTooltip}` + ' ' + areaUnit}
       </SvgText>
       <SvgText
@@ -51,7 +50,7 @@ const Tooltip = ({ x, y, yMax, total, selected, areaUnit, areaLable, fontFamilyN
         textAnchor={'start'}
         fontFamily={fontFamilyName}
         fill={colors.gray1}
-        fontSize={sizes.size12}>
+        fontSize={SIZES(12)}>
         {`${percentageValue} %`}
       </SvgText>
       {areaValue > 70 * (yMax / 100) ? (

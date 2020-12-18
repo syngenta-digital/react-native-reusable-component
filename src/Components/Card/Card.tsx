@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, ViewStyle, StyleSheet, TouchableOpacity } from 'react-native'
+import { ViewStyle, StyleSheet, TouchableOpacity } from 'react-native'
+
 import { colors } from '../../Theme/Colors'
 import { spacing } from '../../Theme/Constants'
 

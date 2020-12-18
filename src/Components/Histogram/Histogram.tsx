@@ -7,7 +7,7 @@ import SliderArea from '../SliderArea/SliderArea'
 import Tooltip from './Tooltip'
 
 import { colors } from '../../Theme/Colors'
-import { fontFamily, sizes, SIZES } from '../../Assets/Font'
+import { fontFamily, SIZES } from '../../Assets/Font'
 
 import { BarChart, XAxis, YAxis, Grid } from 'react-native-svg-charts'
 import Svg, { G, Text as SvgText } from 'react-native-svg'
@@ -17,7 +17,7 @@ import { isTablet } from 'react-native-device-info'
 
 interface Props {
   totalHistogramArea: number | string
-  chartBgHeight: number | 250
+  chartBgHeight: number
   title: string
   histogramText: string
   dataY: Array<any>
@@ -107,7 +107,7 @@ const Histogram = ({
             value
           }
     setselectedValue(newValue)
-  }
+  } //Function to handle click event on bar click
 
   const processedData = graphData.map((element: any, index: any) => {
     element.svg.onPress = () => handlePress(index, element.value)
@@ -165,7 +165,7 @@ const Histogram = ({
                 data={dataY}
                 numberOfTicks={2}
                 contentInset={{ top: SIZES(18), bottom: SIZES(45) }}
-                svg={{ fontSize: sizes.size12, fill: colors.white }}
+                svg={{ fontSize: SIZES(12), fill: colors.white }}
                 formatLabel={(value: any) => `${value}`}
               />
               <View style={[styles.graphArea, barchartAreaStyle]}>
@@ -201,7 +201,7 @@ const Histogram = ({
                     borderTopWidth: 1,
                     paddingTop: SIZES(6),
                     borderTopColor: colors.gray3,
-                    height: sizes.size40
+                    height: SIZES(40)
                   }}
                   data={datax}
                   xAccessor={({ item }: any) => item}
@@ -210,7 +210,7 @@ const Histogram = ({
                     left: isTablet() ? SIZES(50) : SIZES(40),
                     right: isTablet() ? SIZES(50) : SIZES(40)
                   }}
-                  svg={{ fontSize: sizes.size12, fill: colors.white }}
+                  svg={{ fontSize: SIZES(12), fill: colors.white }}
                 />
               </View>
             </View>
@@ -258,14 +258,14 @@ const styles = StyleSheet.create({
     width: '100%',
     flex: 0,
     backgroundColor: 'rgba(0,0,0,0.7)',
-    paddingBottom: sizes.size4,
-    paddingTop: sizes.size10,
+    paddingBottom: SIZES(4),
+    paddingTop: SIZES(10),
     paddingRight: 10,
     paddingLeft: 10,
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6
   },
-  histo_info: { flexDirection: 'row', justifyContent: 'space-between', marginVertical: sizes.size5 },
+  histo_info: { flexDirection: 'row', justifyContent: 'space-between', marginVertical: SIZES(5) },
   histogramText: {
     color: colors.white,
     fontSize: 12,

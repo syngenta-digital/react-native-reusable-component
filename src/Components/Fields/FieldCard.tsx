@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Card from '../Card/Card'
 
 import { colors } from '../../Theme/Colors'
-import { sizes } from '../../Assets/Font'
+import { SIZES } from '../../Assets/Font'
 import AppStyles from '../../Utility/AppStyles'
 
 import Icon from 'react-native-vector-icons/EvilIcons'
@@ -48,7 +48,7 @@ const FieldCard = ({
 }: FieldCardProps) => (
   <Card style={containerStyle || styles.cardStyle}>
     <View style={[styles.fieldIconView, leftIconView]}>
-      <Icon name='location' color={colors.blue} size={sizes.size20} />
+      <Icon name='location' color={colors.blue} size={SIZES(20)} />
     </View>
     <View style={[styles.detailView, fieldDetailsStyle]}>
       {syncError && syncError.length && (
@@ -56,7 +56,7 @@ const FieldCard = ({
           <Text numberOfLines={1} style={styles.errorText}>
             {syncErrorText}: {errorDescription}
           </Text>
-          <Icon name='arrow' size={14} color={colors.baseRed} />
+          <Icon name='arrow' size={SIZES(14)} color={colors.baseRed} />
         </TouchableOpacity>
       )}
       <Text numberOfLines={1} style={[styles.titleText, fieldTitleStyle]}>
@@ -86,13 +86,13 @@ const styles = StyleSheet.create({
   cardStyle: {
     paddingHorizontal: 0,
     paddingVertical: 0,
-    minHeight: 80,
-    maxHeight: 90,
+    minHeight: SIZES(80),
+    maxHeight: SIZES(90),
     flexDirection: 'row',
     alignItems: 'center'
   },
   fieldIconView: {
-    width: 50,
+    width: SIZES(50),
     height: '100%',
     borderTopLeftRadius: 8,
     borderBottomLeftRadius: 8,
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
   detailView: {
     flex: 1,
-    paddingVertical: 15,
+    paddingVertical: SIZES(15),
     flexDirection: 'column',
     justifyContent: 'space-between'
   },
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     flex: 1,
-    fontSize: sizes.size14,
+    fontSize: SIZES(14),
     paddingBottom: '2%',
     marginHorizontal: 14,
     marginRight: 5,
@@ -122,16 +122,16 @@ const styles = StyleSheet.create({
     color: colors.baseRed
   },
   titleText: {
-    fontSize: sizes.size16,
-    marginLeft: sizes.size12,
+    fontSize: SIZES(16),
+    marginLeft: SIZES(12),
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
     color: colors.gray1
   },
   subTitleText: {
-    fontSize: sizes.size14,
-    marginLeft: sizes.size12,
+    fontSize: SIZES(14),
+    marginLeft: SIZES(12),
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -139,6 +139,6 @@ const styles = StyleSheet.create({
   },
   textView: {
     color: colors.baseRed,
-    fontSize: sizes.size14
+    fontSize: SIZES(14)
   }
 })

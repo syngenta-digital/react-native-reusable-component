@@ -1,35 +1,22 @@
 /**
- * AlertComponent is use to show alert on screen, AlertComponent support button actions 
- * 
+ * AlertComponent is use to show alert on screen, AlertComponent support button actions
+ *
  * Title, Message Title, Success button Title/Action , Cancel Button Title/Action
  *
  * Use Case
  *AlertComponent will directly use in xml of component
- *  
-      <AlertComponent
-        visible={this.state.showAlert}
-        onPressOk={() => {
-          console.log('Ok action')
-        }}
-        onPressCancel={() => console.log('cancel action')}
-        alertTitle={'Delete'}
-        alertMsg={'Alert messages'}
-        alertType={AlertType.ERROR}
-        cancelTitle={'Dismiss'}
-        okTitle={'OK'}
-      />
  *
  */
 
 import React from 'react'
-import { View, Text, Modal, StyleSheet, Dimensions, TouchableOpacity, PixelRatio } from 'react-native'
+import { View, Text, Modal, StyleSheet, TouchableOpacity, PixelRatio } from 'react-native'
+
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../../Utility/ResponsiveDimension'
 import { colors } from '../../Theme/Colors'
 import { fonts } from '../../Theme/Fonts'
 
-const { width, height } = Dimensions.get('window')
-
 const guidelineBaseWidth = 360
-const scale = (size: number) => (width / guidelineBaseWidth) * size
+const scale = (size: number) => (SCREEN_WIDTH / guidelineBaseWidth) * size
 
 function normalize(size: any, factor: any = 0.5) {
   let newSize = size + (scale(size) - size) * factor
@@ -78,61 +65,51 @@ class AlertComponent extends React.Component<AlertProps> {
   }
 
   actionButton = (onPress: any, buttonTitle: string, textColor: string, backgroundColor: string) => (
-    <View>
-      <TouchableOpacity
-        onPress={() => onPress()}
-        style={[alertStyles.buttonStyle, { backgroundColor: backgroundColor }]}>
-        <View>
-          <Text
-            style={{
-              color: textColor,
-              ...fonts.h4
-            }}>
-            {buttonTitle}
-          </Text>
-        </View>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity onPress={() => onPress()} style={[alertStyles.buttonStyle, { backgroundColor: backgroundColor }]}>
+      <View>
+        <Text
+          style={{
+            color: textColor,
+            ...fonts.h4
+          }}>
+          {buttonTitle}
+        </Text>
+      </View>
+    </TouchableOpacity>
   )
 
   render() {
     let useColor = this.alertStatusColor()
     let cancelButtonShow = this.showCancelButton()
-
+    let { alertTitle, productName, alertMsg } = this.props
     return (
       <Modal visible={this.props.visible} transparent={true}>
         <View style={alertStyles.container}>
           <View style={alertStyles.popContainer}>
             <View style={[alertStyles.title, { borderBottomColor: useColor }]}>
-              <Text style={[alertStyles.titleText, { color: useColor }]}>{this.props.alertTitle}</Text>
+              <Text style={[alertStyles.titleText, { color: useColor }]}>{alertTitle}</Text>
             </View>
 
-            <View
-              style={{
-                width: '100%',
-                height: '1%',
-                backgroundColor: useColor
-              }}
-            />
+            <View style={[alertStyles.line, { backgroundColor: useColor }]} />
 
             <View style={alertStyles.msgContainer}>
-              {this.props.productName ? (
+              {productName ? (
                 <Text>
-                  <Text style={fonts.body1SemiBold}>{this.props.alertMsg}</Text>
-                  <Text style={alertStyles.msgBoldTextStyle}>{this.props.productName?.toString()}</Text>
+                  <Text style={fonts.body1SemiBold}>{alertMsg}</Text>
+                  <Text style={alertStyles.msgBoldTextStyle}>{productName?.toString()}</Text>
                   <Text style={fonts.body1SemiBold}>{' ?'} </Text>
                 </Text>
               ) : (
-                <Text style={alertStyles.msgTextStyle}>{this.props.alertMsg}</Text>
+                <Text style={alertStyles.msgTextStyle}>{alertMsg}</Text>
               )}
             </View>
 
             <View style={alertStyles.buttonContainer}>
-              {cancelButtonShow ? (
+              {cancelButtonShow && (
                 <View style={alertStyles.popButton}>
                   {this.actionButton(this.props.onPressCancel, this.props.cancelTitle, colors.black, colors.grey20)}
                 </View>
-              ) : null}
+              )}
 
               {this.actionButton(this.props.onPressOk, this.props.okTitle, colors.white, useColor)}
             </View>
@@ -145,8 +122,8 @@ class AlertComponent extends React.Component<AlertProps> {
 
 const alertStyles = StyleSheet.create({
   container: {
-    height: height,
-    width: width,
+    height: SCREEN_HEIGHT,
+    width: SCREEN_WIDTH,
     backgroundColor: colors.blackOpacity3,
     justifyContent: 'center',
     alignItems: 'center',
@@ -167,6 +144,10 @@ const alertStyles = StyleSheet.create({
     alignItems: 'center',
     left: '40%',
     top: '6%'
+  },
+  line: {
+    width: '100%',
+    height: '1%'
   },
 
   title: {
