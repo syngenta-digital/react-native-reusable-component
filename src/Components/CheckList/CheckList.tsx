@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
 import { Text, StyleSheet, View, FlatList } from 'react-native'
 
-import CheckBox from '@react-native-community/checkbox'
-
 import { colors } from '../../Theme/Colors'
+
+import CheckBox from '@react-native-community/checkbox'
 
 interface CheckboxList {
   array: Array<any>
   elementStyle?: any
   labelStyle?: any
   checkboxStyle?: any
+  rightSideText?: boolean
 }
 
-const CheckboxList = ({ ...props }) => {
+const CheckboxList = ({ ...props }: CheckboxList) => {
   const [list, setSelection] = useState(props.array)
-  let { elementStyle, labelStyle, checkboxStyle } = props
+  let { elementStyle, labelStyle, checkboxStyle, rightSideText } = props
   return (
     <FlatList
       data={list}
@@ -22,7 +23,7 @@ const CheckboxList = ({ ...props }) => {
         item = item?.item
         return (
           <View style={[styles.checkboxContainer, elementStyle]}>
-            <Text style={[styles.label, labelStyle]}>{item?.title}</Text>
+            {!rightSideText && <Text style={[styles.label, labelStyle]}>{item?.title}</Text>}
             <CheckBox
               disabled={item?.disabledClick}
               value={item?.isSelected}
@@ -35,6 +36,7 @@ const CheckboxList = ({ ...props }) => {
               tintColors={{ true: checkboxStyle.activeColor, false: checkboxStyle.inactiveColor }}
               {...props}
             />
+            {rightSideText && <Text style={[styles.label, labelStyle]}>{item?.title}</Text>}
           </View>
         )
       }}

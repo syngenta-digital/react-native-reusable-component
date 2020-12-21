@@ -1,12 +1,13 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity, ViewStyle, Alert } from 'react-native'
 
-import { fontFamily, sizes, SIZES } from '../../Assets/Font'
-import { colors } from '../../Theme/Colors'
-import Icon from 'react-native-vector-icons/EvilIcons'
-import Card from '../Card/Card'
-import RenderSyncIcon from './SyncIcon'
+import { fontFamily, SIZES } from '../../Assets/Font'
 import { formatDate } from '../../Utility/DatFormat'
+import { colors } from '../../Theme/Colors'
+import RenderSyncIcon from './SyncIcon'
+import Card from '../Card/Card'
+
+import Icon from 'react-native-vector-icons/EvilIcons'
 
 interface SeasonsCardProps {
   onEdit: (data?: any) => void
@@ -100,7 +101,7 @@ const SeasonsCard = ({
                   {startDate}
                 </Text>
               </View>
-              <View style={{ marginLeft: sizes.size8 }}>
+              <View style={{ marginLeft: SIZES(8) }}>
                 <Text numberOfLines={1} style={[styles.dateTitleTxt, dateTitleStyle]}>
                   {endDateTitle}
                 </Text>
@@ -159,11 +160,11 @@ const styles = StyleSheet.create({
   cardContainer: {
     paddingHorizontal: 0,
     paddingVertical: 0,
-    bottom: sizes.size5
+    bottom: SIZES(5)
   },
   cardTop: {
-    paddingVertical: sizes.size16,
-    paddingHorizontal: sizes.size10,
+    paddingVertical: SIZES(16),
+    paddingHorizontal: SIZES(10),
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
     flexDirection: 'row'
@@ -172,8 +173,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   cropImage: {
-    width: sizes.size84,
-    height: sizes.size119,
+    width: SIZES(84),
+    height: SIZES(119),
     borderRadius: 8,
     backgroundColor: colors.gray6,
     justifyContent: 'center'
@@ -197,7 +198,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: sizes.size12
+    paddingTop: SIZES(12)
   },
   dateUIView: {
     width: '10%',
@@ -210,15 +211,15 @@ const styles = StyleSheet.create({
   },
   dot: {
     color: colors.blue,
-    padding: sizes.size5,
-    fontSize: sizes.size17
+    padding: SIZES(5),
+    fontSize: SIZES(17)
   },
   bottomMargin: {
     marginBottom: 10
   },
 
   errorText: {
-    fontSize: sizes.size14,
+    fontSize: SIZES(14),
     width: '85%',
 
     marginLeft: 12,
@@ -228,7 +229,7 @@ const styles = StyleSheet.create({
     color: colors.baseRed
   },
   lineBetweenDot: { backgroundColor: colors.gray5, height: '20%', width: 2 },
-  dotView: { marginBottom: sizes.size12, marginLeft: sizes.size8 },
+  dotView: { marginBottom: SIZES(12), marginLeft: SIZES(8) },
 
   cardBottom: {
     height: 40,
@@ -247,35 +248,35 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   buttonText: {
-    fontSize: sizes.size16,
-    lineHeight: sizes.size18,
+    fontSize: SIZES(16),
+    lineHeight: SIZES(18),
     color: colors.green,
-    marginRight: sizes.size6
+    marginRight: SIZES(6)
   },
 
   titleView: {
-    marginHorizontal: sizes.size12,
+    marginHorizontal: SIZES(12),
     width: '92%',
     flexDirection: 'row',
     justifyContent: 'flex-start'
   },
   dateTitleTxt: {
-    fontSize: sizes.size12,
+    fontSize: SIZES(12),
     color: colors.gray3,
-    lineHeight: sizes.size13
+    lineHeight: SIZES(13)
   },
   dateTxt: {
-    fontSize: sizes.size14,
+    fontSize: SIZES(14),
     color: colors.gray_1,
-    lineHeight: sizes.size15
+    lineHeight: SIZES(15)
   },
   newTxt: {
-    fontSize: sizes.size14,
+    fontSize: SIZES(14),
     color: colors.blue,
-    lineHeight: sizes.size15,
+    lineHeight: SIZES(15),
     backgroundColor: colors.blue50,
-    paddingVertical: sizes.size4,
-    paddingHorizontal: sizes.size6
+    paddingVertical: SIZES(4),
+    paddingHorizontal: SIZES(6)
   },
   dateView: {
     width: '50%',
@@ -292,24 +293,24 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end'
   },
   actionView: {
-    marginRight: sizes.size3
+    marginRight: SIZES(3)
   },
   actionBorderView: {
     borderLeftWidth: 1,
     borderLeftColor: colors.borderColor
   },
   actionTxt: {
-    fontSize: sizes.size14,
+    fontSize: SIZES(14),
     color: colors.blue,
-    lineHeight: sizes.size15,
-    paddingVertical: sizes.size6,
-    paddingHorizontal: sizes.size5
+    lineHeight: SIZES(15),
+    paddingVertical: SIZES(6),
+    paddingHorizontal: SIZES(5)
   },
 
   syncMsg: {
     color: colors.white,
     top: -7,
-    lineHeight: sizes.size20
+    lineHeight: SIZES(20)
   },
   viewMore: {
     alignSelf: 'flex-end',
@@ -322,30 +323,30 @@ const styles = StyleSheet.create({
     maxHeight: '100%',
     backgroundColor: 'black',
     alignSelf: 'flex-end',
-    borderRadius: sizes.size5,
+    borderRadius: SIZES(5),
     justifyContent: 'center',
-    padding: sizes.size10,
+    padding: SIZES(10),
     position: 'absolute',
     zIndex: 5,
     // right: isTablet()? '2%':'1%',
-    marginTop: sizes.size35,
-    paddingLeft: sizes.size12
+    marginTop: SIZES(35),
+    paddingLeft: SIZES(12)
   },
   triangle: {
-    height: sizes.size14,
-    width: sizes.size14,
+    height: SIZES(14),
+    width: SIZES(14),
     borderTopRightRadius: 100,
     backgroundColor: 'black',
     alignSelf: 'flex-end',
     transform: [{ rotate: '45deg' }],
     borderBottomEndRadius: 100,
     borderBottomLeftRadius: 100,
-    // marginRight: sizes.size3,
+    // marginRight: SIZES(3),
     bottom: SIZES(14)
   },
   syncErrorMsg: {
     color: colors.white,
-    lineHeight: sizes.size15
+    lineHeight: SIZES(15)
   }
 })
 

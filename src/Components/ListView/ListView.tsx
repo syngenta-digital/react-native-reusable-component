@@ -1,8 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native'
+
 import { colors } from '../../Theme/Colors'
+
 import Icon from 'react-native-vector-icons/EvilIcons'
+import PropTypes from 'prop-types'
 
 interface ListViewProps {
   list: any
