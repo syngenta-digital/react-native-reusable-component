@@ -1,5 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, Text, StyleSheet, Image, ViewStyle } from 'react-native'
+
+import { SIZES } from '../../Assets/Font'
 import { colors } from '../../Theme/Colors'
 import { fonts } from '../../Theme/Fonts'
 
@@ -29,9 +31,9 @@ export default Avatar
 
 const styles = StyleSheet.create({
   avatarStyle: {
-    height: 64,
-    width: 64,
-    borderRadius: 32,
+    height: SIZES(64),
+    width: SIZES(64),
+    borderRadius: SIZES(32),
     backgroundColor: colors.grey20,
     borderWidth: 1,
     borderColor: colors.grey30,
@@ -39,9 +41,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   image: {
-    height: 64,
-    width: 64,
-    borderRadius: 32,
+    height: SIZES(64),
+    width: SIZES(64),
+    borderRadius: SIZES(32),
     borderWidth: 1,
     borderColor: colors.grey30,
     alignItems: 'center',

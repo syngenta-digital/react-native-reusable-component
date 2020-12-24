@@ -1,7 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { TouchableOpacity, Text, StyleSheet } from 'react-native'
+import { TouchableOpacity, Text, StyleSheet, ViewStyle } from 'react-native'
+
 import { colors } from '../../Theme/Colors'
+import { SIZES } from '../../Assets/Font'
+
+import Icon from 'react-native-vector-icons/FontAwesome5'
+import PropTypes from 'prop-types'
 
 interface Props {
   title?: string
@@ -16,6 +20,10 @@ interface Props {
   noTitle?: boolean
   children?: React.ReactNode
   textProps?: any
+  leftIconName?: string
+  rightIconName?: string
+  iconColor?: string
+  iconStyle?: ViewStyle
 }
 
 const CustomButton = ({
@@ -25,6 +33,10 @@ const CustomButton = ({
   disabled,
   textStyle,
   borderButton,
+  leftIconName,
+  rightIconName,
+  iconStyle,
+  iconColor,
   borderStyle,
   shadowButton,
   btnSize,
@@ -38,7 +50,10 @@ const CustomButton = ({
         style={[
           styles.container,
           // eslint-disable-next-line react-native/no-inline-styles
-          { width: btnSize === 'small' ? '25%' : btnSize === 'medium' ? '50%' : '100%' },
+          {
+            flexDirection: children ? 'column' : 'row',
+            width: btnSize === 'small' ? '25%' : btnSize === 'medium' ? '50%' : '100%'
+          },
           disabled && styles.disabledBtnView,
           shadowButton && styles.shadowButton,
           borderButton ? styles.borderButton : {},
@@ -47,6 +62,14 @@ const CustomButton = ({
         ]}
         disabled={disabled}
         onPress={() => onPress()}>
+        {leftIconName && (
+          <Icon
+            name={leftIconName}
+            size={SIZES(14)}
+            color={iconColor || colors.gray2}
+            style={[styles.btnIcon || iconStyle]}
+          />
+        )}
         {!noTitle && (
           <Text
             {...textProps}
@@ -58,6 +81,14 @@ const CustomButton = ({
             ]}>
             {title}
           </Text>
+        )}
+        {rightIconName && (
+          <Icon
+            name={rightIconName}
+            size={SIZES(14)}
+            color={iconColor || colors.gray2}
+            style={[styles.btnIcon || iconStyle]}
+          />
         )}
         {children}
       </TouchableOpacity>
@@ -84,13 +115,14 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     borderRadius: 4,
-    minHeight: 44,
+    minHeight: SIZES(44),
     backgroundColor: colors.green50,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
     padding: 5
   },
+  btnIcon: { marginHorizontal: 5 },
   shadowButton: {
     elevation: 7,
     shadowOffset: { width: 1, height: 2 },

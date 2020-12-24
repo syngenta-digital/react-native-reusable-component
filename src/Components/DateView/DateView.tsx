@@ -1,7 +1,9 @@
 import React from 'react'
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
-import Icon from 'react-native-vector-icons/EvilIcons'
+
 import { colors } from '../../Theme/Colors'
+
+import Icon from 'react-native-vector-icons/EvilIcons'
 import PropTypes from 'prop-types'
 
 interface Props {
@@ -20,7 +22,7 @@ interface Props {
   iconColor?: string
 }
 
-const DateView = ({ ...props }) => (
+const DateView = ({ ...props }: Props) => (
   <TouchableOpacity
     disabled={props.disabled}
     onPress={() => {
@@ -33,7 +35,7 @@ const DateView = ({ ...props }) => (
       <Text style={[styles.dateTitle, props.titleStyle]}>{props.end}</Text>
     </View>
     <View style={[styles.calendarIcon, props.iconViewStyle]}>
-      <Icon name={props.iconName} size={props.iconSize} color={props.iconColor} />
+      {props.iconName && <Icon name={props.iconName} size={props.iconSize} color={props.iconColor} />}
     </View>
   </TouchableOpacity>
 )

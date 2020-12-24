@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, ViewStyle, StyleSheet, TouchableOpacity } from 'react-native'
+import { ViewStyle, StyleSheet, TouchableOpacity } from 'react-native'
+
 import { colors } from '../../Theme/Colors'
 import { spacing } from '../../Theme/Constants'
 
@@ -12,7 +13,7 @@ interface CardProps {
 
 const Card = ({ onPress, children, style, disabled }: CardProps) => (
   <TouchableOpacity disabled={disabled} style={[styles.container, style]} onPress={onPress}>
-    <View>{children}</View>
+    <>{children}</>
   </TouchableOpacity>
 )
 export default Card
