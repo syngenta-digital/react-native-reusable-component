@@ -15,6 +15,7 @@ interface Props {
   btnSize?: string
   noTitle?: boolean
   children?: React.ReactNode
+  textProps?: any
 }
 
 const CustomButton = ({
@@ -28,7 +29,8 @@ const CustomButton = ({
   shadowButton,
   btnSize,
   children,
-  noTitle
+  noTitle,
+  textProps
 }: Props) => {
   return (
     <>
@@ -47,6 +49,7 @@ const CustomButton = ({
         onPress={() => onPress()}>
         {!noTitle && (
           <Text
+            {...textProps}
             style={[
               styles.title,
               borderButton && styles.borderButtonText,
