@@ -1,15 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StyleSheet, View, Text, Animated, TouchableOpacity, ViewStyle } from 'react-native'
+import { StyleSheet, View, Text, Animated, TouchableOpacity, ViewStyle, TextStyle } from 'react-native'
 
 interface props {
-  animationTypes: Array<any>
-  selectedBtn: (data: any) => void
-  boxStyle: ViewStyle
-  style: ViewStyle
+  animationTypes: Array<any> //array of string having following types- 'zoomIn', 'pulse', 'shake', 'rotate', you can use one or more of this value for exaple: ['pulse'] or ['pulse', 'rotate']
+  selectedBtn: (data: any) => void //this is callback function which calls when radio button is selected and returns selected element
+  boxStyle?: ViewStyle
+  style?: ViewStyle
   circleSize: number
-  textStyle: ViewStyle
+  textStyle: TextStyle
   data: Array<any>
   icon?: any
   activeColor: string
