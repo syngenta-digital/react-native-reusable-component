@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { View, StyleSheet } from 'react-native'
 
-export default function CenterView({ children }: any) {
-  return <View style={styles.main}>{children}</View>
+export default function CenterView({ children, childrenStyle }: any) {
+  return <View style={[styles.main, childrenStyle]}>{children}</View>
 }
 
 CenterView.defaultProps = {
@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: '#F5FCFF',
-    paddingHorizontal: 50
+    paddingHorizontal: 50,
+    marginTop: 100
   }
 })
