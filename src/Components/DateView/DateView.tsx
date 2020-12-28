@@ -5,17 +5,17 @@ import { colors } from '../../Theme/Colors'
 
 import Icon from 'react-native-vector-icons/EvilIcons'
 import PropTypes from 'prop-types'
+import { SIZES } from '../../Assets/Font'
 
 interface Props {
   start: string
   onPress?: any
   end: string
   disabled?: boolean
-  container?: object
+  containerStyle?: object
   dateViewStyle?: object
   titleStyle?: object
-  dash?: object
-  borderStyle?: object
+  dashStyle?: object
   iconViewStyle?: object
   iconName?: string
   iconSize?: number
@@ -28,10 +28,10 @@ const DateView = ({ ...props }: Props) => (
     onPress={() => {
       props.onPress()
     }}
-    style={[styles.dateRangeView, props.container, props.borderStyle]}>
+    style={[styles.dateRangeView, props.containerStyle]}>
     <View style={[styles.calendarButton, props.dateViewStyle]}>
       <Text style={[styles.dateTitle, props.titleStyle]}>{props.start}</Text>
-      <View style={[styles.thinLine, props.dash]} />
+      <View style={[styles.thinLine, props.dashStyle]} />
       <Text style={[styles.dateTitle, props.titleStyle]}>{props.end}</Text>
     </View>
     <View style={[styles.calendarIcon, props.iconViewStyle]}>
@@ -57,14 +57,13 @@ DateView.defaultProps = {
 
 const styles = StyleSheet.create({
   dateRangeView: {
-    height: '12%',
+    height: SIZES(50),
     alignItems: 'center',
     flexDirection: 'row'
   },
   calendarButton: {
-    minWidth: '78%',
-    marginLeft: '6%',
-    height: '50%',
+    flex: 1,
+    height: '90%',
     borderColor: colors.grey40,
     borderWidth: 1,
     flexDirection: 'row',
@@ -74,8 +73,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.grey20
   },
   calendarIcon: {
-    width: '15%',
-    height: '50%',
+    minWidth: '15%',
+    height: '90%',
     justifyContent: 'center',
     alignItems: 'center'
   },
