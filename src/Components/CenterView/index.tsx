@@ -11,7 +11,8 @@ CenterView.defaultProps = {
 }
 
 CenterView.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  customStyle: PropTypes.any
 }
 
 const styles = StyleSheet.create({
