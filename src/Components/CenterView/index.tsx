@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { View, StyleSheet } from 'react-native'
 
-export default function CenterView({ children, childrenStyle }: any) {
-  return <View style={[styles.main, childrenStyle]}>{children}</View>
+export default function CenterView({ children, customStyle }: any) {
+  return <View style={[styles.main, customStyle]}>{children}</View>
 }
 
 CenterView.defaultProps = {

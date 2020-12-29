@@ -11,7 +11,7 @@ import { storiesOf } from '@storybook/react-native'
 import { colors } from '../../Theme/Colors'
 
 const checkboxStories = storiesOf('CheckBoxList', module)
-checkboxStories.addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+checkboxStories.addDecorator((getStory: any) => <CenterView>{getStory()}</CenterView>)
 
 checkboxStories.add('Default CheckBox', () => (
   <Checkbox

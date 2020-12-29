@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 
 interface Props {
   title?: string
-  onPress?: any
+  onPress: any
   disabled?: boolean
   btnStyle?: object
   textStyle?: object

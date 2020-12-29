@@ -6,12 +6,12 @@ import CenterView from '../CenterView/index'
 
 import { boolean, object, radios, text } from '@storybook/addon-knobs'
 import { storiesOf } from '@storybook/react-native'
-import { action, actions } from '@storybook/addon-actions'
+import { action } from '@storybook/addon-actions'
 
 import { colors } from '../../Theme/Colors'
 
 const buttonStories = storiesOf('CustomButton', module)
-buttonStories.addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+buttonStories.addDecorator((getStory: any) => <CenterView>{getStory()}</CenterView>)
 
 const label = 'Button Size'
 const sizeOptions = {
@@ -27,7 +27,7 @@ buttonStories.add('Default Buttons', () => (
   <>
     <CustomButton
       title={text('Button title', 'Default Button')}
-      onPress={action('clicked-text')}
+      onPress={action('Click Event')}
       disabled={boolean('disabled', false)}
       shadowButton={boolean('shadowButton', false)}
       borderButton={boolean('borderButton', false)}
@@ -40,14 +40,14 @@ buttonStories.add('Default Buttons', () => (
 
     <CustomButton
       title={'Medium Size Button'}
-      onPress={() => actions('clicked-text')}
+      onPress={action('Click Event')}
       btnSize={'medium'}
       btnStyle={styles.marginAround}
     />
 
     <CustomButton
       title={'small Button'}
-      onPress={() => actions('clicked-text')}
+      onPress={action('Click Event')}
       btnSize={'small'}
       btnStyle={styles.marginAround}
     />
@@ -57,7 +57,7 @@ buttonStories.add('Default Buttons', () => (
 buttonStories.add('Border Button', () => (
   <CustomButton
     title={text('Button title', 'Default Border')}
-    onPress={() => actions('clicked-text')}
+    onPress={action('Click Event')}
     borderButton={boolean('borderButton', true)}
     btnSize={radios(label, sizeOptions, 'medium', groupId)}
     borderStyle={object('borderStyle', {})}
@@ -71,7 +71,7 @@ buttonStories.add('Shadow Button', () => (
     btnSize={radios(label, sizeOptions, 'medium', groupId)}
     disabled={boolean('disabled', false)}
     borderButton={boolean('borderButton', false)}
-    onPress={() => actions('clicked-text')}
+    onPress={action('Click Event')}
     btnStyle={object('btnStyle', {})}
     textStyle={object('textStyle', {})}
     textProps={object('textProps', {})}
@@ -83,7 +83,7 @@ buttonStories.add('Disabled Button', () => (
   <CustomButton
     title={text('Button title', 'Disabled Title')}
     btnSize={radios(label, sizeOptions, 'medium', groupId)}
-    onPress={() => actions('clicked-text')}
+    onPress={action('Click Event')}
     disabled={boolean('disabled', true)}
   />
 ))
