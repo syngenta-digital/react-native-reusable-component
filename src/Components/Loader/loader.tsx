@@ -61,7 +61,8 @@ const AppLoaderStyles = StyleSheet.create({
 
 AppLoader.defaultProps = {
   loaderColor: colors.blue50,
-  size: SIZES(20)
+  size: SIZES(20),
+  showLoader: true
 }
 
 export default AppLoader
