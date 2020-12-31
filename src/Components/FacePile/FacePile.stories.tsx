@@ -118,7 +118,7 @@ FacePileStories.add('FacePile for Images', () => (
       'imageUrls'
     )}
     textColor={color('textColor', colors.white)}
-    circleSize={number('circleSize', 100)}
+    circleSize={number('circleSize', 90)}
     imageStyle={object('imageStyle', {})}
     containerStyle={object('containerStyle', {})}
   />

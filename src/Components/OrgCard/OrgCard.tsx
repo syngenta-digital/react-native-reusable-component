@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ViewStyle, TextStyle } from 'react-native'
 import { colors } from '../../Theme/Colors'
 import Card from '../Card/Card'
 import Icon from 'react-native-vector-icons/EvilIcons'
@@ -7,22 +7,19 @@ import AntIcon from 'react-native-vector-icons/AntDesign'
 
 import CustomButton from '../Button/Button'
 import { fonts } from '../../Theme/Fonts'
+import FacePile from '../FacePile/FacePile'
+import { SIZES } from '../../Assets/Font'
+import RenderSyncIcon from '../SeasonCard/SyncIcon'
 
 interface OrganizationCardProps {
+  org: any
   onCardClick?: (data: any) => void
-  onBottomCardClick?: (data: any, index: any) => void
+  onDownloadOrg: (data?: any) => void
   viewMoreErrors?: () => void
   syncMsgText?: string
-  noCropsText?: string
-  org: any
-  orgDownloadTxt?: string
-  propertiesTitle?: string
-  bottomText?: string
   image?: string
   orgIndex?: number
   areaUnit?: string
-  orgsList?: any
-  setSelectedOrg?: any
   downloadOrgList?: any
   isDownloaded?: boolean
   DEFAULT_CROP_ICON_NAME: string
@@ -33,36 +30,19 @@ interface OrganizationCardProps {
   errorInRequest?: any
   cropsLength: number
   cropsArray?: any
+  orgDownloadTxt?: string //Download Button Text
+  downloadBtnStyle?: ViewStyle //Download button style
+
+  orgTitleStyle?: TextStyle // Organization title Style
+  propertiesTitle?: string // title showing no of properties
+  noCropsText?: string // Text to render when there are no crops
+
+  bottomText?: string // Bottom Button Text on Card
+  onBottomCardClick?: (data: any) => void // Bottom button click event
 }
 
 const OrganizationCard = ({ ...props }: OrganizationCardProps) => {
   const [isSyncMsgVisible, setSyncVisibility] = useState(false)
-
-  const renderSyncIcon = (org: any) => {
-    let { syncStatus } = props
-
-    if (syncStatus !== 'none' && org && org.detailDownloaded) {
-      return (
-        <TouchableOpacity
-          onPress={() => {
-            setSyncVisibility(!isSyncMsgVisible)
-          }}
-          style={[
-            OrganizationCardStyles.statusView,
-            {
-              backgroundColor:
-                syncStatus === 'success' ? colors.green10 : syncStatus === 'error' ? colors.red10 : colors.red50
-            }
-          ]}>
-          <Icon
-            name={syncStatus === 'success' ? 'check' : 'syncError'}
-            size={syncStatus === 'success' ? 10 : 20}
-            color={colors.white}
-          />
-        </TouchableOpacity>
-      )
-    }
-  }
 
   const renderSyncDetails = () => {
     let { syncStatus, errorInRequest, viewMoreErrors, syncMsgText } = props
@@ -99,7 +79,28 @@ const OrganizationCard = ({ ...props }: OrganizationCardProps) => {
     return true
   }
 
-  let { onCardClick, org, orgDownloadTxt, propertiesTitle, onBottomCardClick, bottomText, noCropsText } = props
+  let {
+    onCardClick,
+    org,
+    orgDownloadTxt,
+    propertiesTitle,
+    onBottomCardClick,
+    bottomText,
+    noCropsText,
+    onDownloadOrg,
+    downloadBtnStyle,
+    orgTitleStyle,
+    cropsLength,
+    cropsArray,
+    syncStatus,
+    DEFAULT_CROP_ICON_NAME
+  } = props
+  let cropIconsArray: string[] = []
+  if (cropsLength) {
+    cropsArray.map((crop: string) =>
+      Icon.hasIcon(crop) ? cropIconsArray.push(crop) : cropIconsArray.push(DEFAULT_CROP_ICON_NAME)
+    )
+  }
   return (
     <Card disabled={true}>
       <TouchableOpacity disabled={!onCardClick} onPress={() => (onCardClick ? onCardClick(org) : {})}>
@@ -107,62 +108,54 @@ const OrganizationCard = ({ ...props }: OrganizationCardProps) => {
           <View style={OrganizationCardStyles.imageView}>
             <Text style={OrganizationCardStyles.imageTxt}>{org?.name.substr(0, 2).toUpperCase()}</Text>
           </View>
-          <Text numberOfLines={2} ellipsizeMode='tail' style={[fonts.h4SemiBold, OrganizationCardStyles.titleText]}>
-            {props.org?.name}
+          <Text
+            numberOfLines={2}
+            ellipsizeMode='tail'
+            style={[fonts.h4SemiBold, OrganizationCardStyles.titleText, orgTitleStyle]}>
+            {org?.name}
           </Text>
-          {renderSyncIcon(org)}
+          {org && org.detailDownloaded && <RenderSyncIcon syncStatus={syncStatus} />}
+          {/* {renderSyncIcon(org)} */}
         </View>
         {renderSyncDetails()}
         {!org.isDownloaded ? (
-          <CustomButton title={orgDownloadTxt} onPress={() => {}} btnStyle={OrganizationCardStyles.offlineBtn} />
+          <CustomButton
+            title={orgDownloadTxt}
+            onPress={onDownloadOrg ? () => onDownloadOrg(org) : () => {}}
+            btnStyle={[OrganizationCardStyles.downloadBtnStyle, downloadBtnStyle]}
+          />
         ) : (
           <View>
             <View style={OrganizationCardStyles.propertyView}>
-              <Icon name='location' size={14} color={colors.grey20} />
+              <Icon name='location' size={SIZES(16)} color={colors.grey20} />
               <Text style={OrganizationCardStyles.propertyText}>
                 {String(org?.properties?.length || '0') + ' ' + propertiesTitle}
               </Text>
             </View>
             <View style={OrganizationCardStyles.landView}>
               <View style={OrganizationCardStyles.areaView}>
-                <Icon name='share-google' size={14} color={colors.grey20} />
+                <Icon name='share-google' size={SIZES(16)} color={colors.grey20} />
                 <Text numberOfLines={1} style={OrganizationCardStyles.areaText} ellipsizeMode='tail'>
                   {org?.area || '--'}
                 </Text>
-                <Text style={[OrganizationCardStyles.areaText, { width: '15%' }]}>{props.org?.areaunit || 'ha'}</Text>
+                <Text style={[OrganizationCardStyles.areaText, { width: '15%' }]}>{org?.areaunit || 'ha'}</Text>
               </View>
-              <View style={OrganizationCardStyles.cropView}>
-                {props.cropsLength === 0 ? (
-                  <View style={OrganizationCardStyles.areaViewCrop}>
-                    <Icon name='cropseason' size={16} color={colors.grey20} style={{ marginLeft: 1 }} />
-                    <Text style={OrganizationCardStyles.noCropText}>{noCropsText}</Text>
-                  </View>
-                ) : null}
-                {props.cropsLength &&
-                  props.cropsArray.map((crop: any, index: number) => {
-                    if (index < 3) {
-                      let cropName = crop
-                      let hasIcon = Icon.hasIcon(cropName)
-                      return (
-                        <View
-                          key={index + 1100}
-                          style={[OrganizationCardStyles.cropImageView, { backgroundColor: colors.green50 }]}>
-                          {hasIcon ? (
-                            <Icon name={cropName} color={colors.white} size={20} />
-                          ) : (
-                            <Icon name={props.DEFAULT_CROP_ICON_NAME} color={colors.white} size={20} />
-                          )}
-                        </View>
-                      )
-                    }
-                  })}
-                {/* {!ValidationManager.objectShared.isEmptyObject(org) && */}
-                {true && org?.seasons && props.cropsArray && props.cropsLength > 3 && (
-                  <View style={[OrganizationCardStyles.cropStyle]}>
-                    <Text style={OrganizationCardStyles.numberStyle}>{'+' + (props.cropsLength - 3)}</Text>
-                  </View>
-                )}
-              </View>
+              {!props.cropsLength ? (
+                <View style={OrganizationCardStyles.areaViewCrop}>
+                  <Icon name='cropseason' size={16} color={colors.grey20} style={{ marginLeft: 1 }} />
+                  <Text style={OrganizationCardStyles.noCropText}>{noCropsText}</Text>
+                </View>
+              ) : (
+                <FacePile
+                  array={cropIconsArray}
+                  maxCircleValue={4}
+                  type={'icon'}
+                  containerStyle={{ flex: 0, alignSelf: 'center', marginTop: 10 }}
+                  circleBgColor={colors.grey20}
+                  circleSize={SIZES(30)}
+                  textColor={colors.black}
+                />
+              )}
             </View>
             <Text numberOfLines={2} style={OrganizationCardStyles.addressText}>
               {org?.address || '--'}
@@ -171,7 +164,7 @@ const OrganizationCard = ({ ...props }: OrganizationCardProps) => {
         )}
       </TouchableOpacity>
       {org?.isDownloaded && (
-        <TouchableOpacity onPress={() => (onBottomCardClick ? onBottomCardClick(org, 1) : {})}>
+        <TouchableOpacity onPress={() => (onBottomCardClick ? onBottomCardClick(org) : {})}>
           <View style={OrganizationCardStyles.cardBottom}>
             <Text style={OrganizationCardStyles.accessText}>{bottomText}</Text>
             <AntIcon name='right' size={16} color={colors.grey40} />
@@ -183,7 +176,14 @@ const OrganizationCard = ({ ...props }: OrganizationCardProps) => {
 }
 
 OrganizationCard.defaultProps = {
-  DEFAULT_CROP_ICON_NAME: 'settings'
+  DEFAULT_CROP_ICON_NAME: 'settings',
+  orgDownloadTxt: 'Download Organization',
+  onDownloadOrg: () => {},
+  cropsLength: 0,
+  propertiesTitle: 'Properties',
+  bottomText: 'View Details',
+  noCropsText: 'No Crops',
+  syncStatus: 'none'
 }
 
 const OrganizationCardStyles = StyleSheet.create({
@@ -210,7 +210,7 @@ const OrganizationCardStyles = StyleSheet.create({
     marginLeft: 8,
     color: colors.grey90
   },
-  offlineBtn: {
+  downloadBtnStyle: {
     width: '100%',
     borderWidth: 0,
     marginTop: 16,
@@ -253,9 +253,8 @@ const OrganizationCardStyles = StyleSheet.create({
     marginTop: 12
   },
   areaView: {
+    flex: 1,
     flexGrow: 1,
-    flexShrink: 1,
-    width: '50%',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -276,16 +275,17 @@ const OrganizationCardStyles = StyleSheet.create({
     marginLeft: 7
   },
   cropView: {
-    width: '50%',
+    flex: 1,
+    backgroundColor: 'red',
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    alignItems: 'flex-start',
+    alignItems: 'flex-end',
     paddingRight: true ? 5 : 0
   },
   cardBottom: {
     marginTop: 10,
     paddingTop: 5,
-    height: 30,
+    height: 50,
     width: '100%',
     paddingHorizontal: 5,
     flexDirection: 'row',
@@ -358,8 +358,8 @@ const OrganizationCardStyles = StyleSheet.create({
     top: -7
   },
   triangle: {
-    height: 14,
-    width: 14,
+    height: SIZES(14),
+    width: SIZES(14),
     borderTopRightRadius: 100,
     backgroundColor: 'black',
     alignSelf: 'flex-end',
@@ -367,7 +367,7 @@ const OrganizationCardStyles = StyleSheet.create({
     borderBottomEndRadius: 100,
     borderBottomLeftRadius: 100,
     marginRight: 3,
-    bottom: 14
+    bottom: SIZES(14)
   },
   padding: {
     padding: 10,

@@ -25,6 +25,7 @@ interface searchProps {
   cancelTextStyle?: any
   clearIcon?: any
   inputFieldProps?: any
+  ref?: any
 }
 
 const SearchField = ({ ...props }: searchProps) => {
@@ -43,6 +44,7 @@ const SearchField = ({ ...props }: searchProps) => {
     imagePath,
     cancelTextStyle,
     cancelAreaStyle,
+    keyboardType,
     clearIcon
   } = props
   const [showValues, setValues] = useState({ searchText: '', activeSearch: true })
@@ -99,6 +101,7 @@ const SearchField = ({ ...props }: searchProps) => {
           autoCorrect={false}
           value={showValues.searchText}
           maxLength={maxLength}
+          keyboardType={keyboardType || 'default'}
           returnKeyLabel='search'
           returnKeyType='search'
           onSubmitEditing={() => searchOnSubmit(showValues.searchText)}
@@ -191,6 +194,7 @@ const styles = StyleSheet.create({
   },
   cancelTxt: {
     fontSize: isTablet() ? SIZES(16) : SIZES(14),
-    color: colors.green80
+    color: colors.green80,
+    alignSelf: 'center'
   }
 })

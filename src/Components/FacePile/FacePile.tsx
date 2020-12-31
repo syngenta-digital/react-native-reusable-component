@@ -49,7 +49,7 @@ const renderText = (
       return (
         <Icon
           name={element || defaultIconName}
-          color={colors.white}
+          color={textColor || colors.white}
           size={(circleSize && circleSize / 2.2) || 20}
           style={styles.centerAlign}
         />
@@ -86,9 +86,10 @@ const FacePile = ({
       if (index <= maxCircleValue) {
         return (
           <View
+            key={index}
             style={[
               styles.circleView,
-              { backgroundColor: colorsArray?.length ? colorsArray[index] : circleBgColor || colors.white },
+              { backgroundColor: colorsArray?.length ? colorsArray[index] : circleBgColor || colors.grey20 },
               circleSize && { width: circleSize, height: circleSize, borderRadius: circleSize / 2 },
               type === 'imageUrls' && { padding: 20 },
               circleStyle
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
-    marginLeft: -SIZES(10),
+    marginLeft: -SIZES(8),
     borderWidth: 1,
     borderColor: colors.grey60,
     top: -SIZES(6)
