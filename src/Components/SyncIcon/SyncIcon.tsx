@@ -1,19 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { TouchableOpacity, View, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/EvilIcons'
 import { colors } from '../../Theme/Colors'
 
 interface props {
   syncStatus: string
+  onPress?: () => void
 }
 
-const RenderSyncIcon = ({ syncStatus }: props) => {
-  const [isSyncMsgVisible, setSyncVisibility] = useState(false)
+const RenderSyncIcon = ({ syncStatus, onPress }: props) => {
   if (syncStatus && syncStatus !== 'none') {
     return (
       <TouchableOpacity
         onPress={() => {
-          setSyncVisibility(!isSyncMsgVisible)
+          if (onPress) {
+            onPress()
+          }
         }}
         style={[
           SeasonCardStyles.statusView,

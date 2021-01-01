@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, ViewStyle, Alert } fro
 import { fontFamily, SIZES } from '../../Assets/Font'
 import { formatDate } from '../../Utility/DatFormat'
 import { colors } from '../../Theme/Colors'
-import RenderSyncIcon from './SyncIcon'
+import RenderSyncIcon from '../SyncIcon/SyncIcon'
 import Card from '../Card/Card'
 
 import Icon from 'react-native-vector-icons/EvilIcons'

@@ -1,13 +1,9 @@
 import React from 'react'
-import { Text } from 'react-native'
 import OrgCard from './OrgCard'
 import CenterView from '../CenterView/index'
 
-import { boolean, color, object, text } from '@storybook/addon-knobs'
+import { object, radios, text } from '@storybook/addon-knobs'
 import { storiesOf } from '@storybook/react-native'
-
-import { Alert } from 'react-native'
-import { colors } from '../../Theme/Colors'
 import { action } from '@storybook/addon-actions'
 
 const OrganizationCardStories = storiesOf('OrganizationCard Story', module)
@@ -43,7 +39,7 @@ OrganizationCardStories.add('Organization Card', () => (
     onCardClick={action('Organizatin Card has been clicked...!!!')}
     noCropsText={text('noCro  psText', 'No Crops')}
     cropsLength={5}
-    cropsArray={['calendar', 'arrow-right', 'arrow-up', 'arraow-down', 'arrow-right', 'arrow-up', 'arraow-down']}
+    cropsArray={['calendar', 'arrow-right', 'arrow-up', 'arrow-right', 'arrow-up', 'arraow-down']}
   />
 ))
 
@@ -63,6 +59,20 @@ OrganizationCardStories.add('Organization Card with Sync Status', () => (
     onCardClick={action('Organizatin Card has been clicked...!!!')}
     noCropsText={text('noCro  psText', 'No Crops')}
     cropsLength={5}
-    cropsArray={['calendar', 'arrow-right', 'arrow-up', 'arraow-down', 'arrow-right', 'arrow-up', 'arraow-down']}
+    syncStatus={radios(
+      'syncStatus',
+      {
+        none: 'none',
+        success: 'success',
+        error: 'error',
+        pending: 'pending'
+      },
+      'success',
+      'syncStatus'
+    )}
+    syncMsgText={text('syncMsgText', 'Sync Successfully Completed')}
+    errorInRequest={text('errorInRequest', 'Error 1, Error 2')}
+    viewMoreErrors={action('Navigate to error details screen')}
+    cropsArray={['calendar', 'arrow-right', 'arrow-up', 'arrow-right', 'arrow-up', 'arraow-down']}
   />
 ))
