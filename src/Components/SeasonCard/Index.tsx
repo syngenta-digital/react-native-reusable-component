@@ -14,16 +14,8 @@ interface SeasonsCardProps {
   onDelete?: (data?: any) => void
   cropIcon: any
   imageURI?: any
-  org?: any
-  onPressEnter?: () => void
-  navigation?: any
   data?: any
-  isNew?: boolean
   cardAtSettings?: boolean
-  deleteSeason?: any
-  setSeasonId?: any
-  isLoading?: boolean
-  isSearch?: boolean
   season: any
   cropImageViewStyle?: ViewStyle
   cropImageStyle?: any

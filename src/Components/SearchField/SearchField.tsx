@@ -114,9 +114,9 @@ const SearchField = ({ ...props }: searchProps) => {
             clearSearchResult()
           }}>
           {imagePath?.name ? (
-            <Image source={imagePath.name} style={[styles.clearSearchIcon, imagePath?.style]} />
+            <Image source={{ uri: imagePath?.name }} style={[styles.clearSearchIcon, imagePath?.style]} />
           ) : (
-            <Icon name={clearIcon?.name} size={16 || clearIcon?.size} color={colors.grey20} />
+            <Icon name={clearIcon?.name} size={16 || clearIcon?.size} color={clearIcon?.color} />
           )}
         </TouchableOpacity>
       </View>
@@ -141,7 +141,7 @@ SearchField.defaultProps = {
   searchOnSubmit: () => {},
   onTextChange: () => {},
   clearSearchResult: () => {},
-  clearIcon: { name: 'search', size: 16 }
+  clearIcon: { name: 'search', size: 16, color: colors.grey20 }
 }
 
 export default SearchField
@@ -185,8 +185,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   clearSearchIcon: {
-    width: SIZES(20),
-    height: SIZES(20)
+    width: '100%',
+    height: '100%'
   },
   border: {
     borderWidth: isTablet() ? 1 : 0.5,

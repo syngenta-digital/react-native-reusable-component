@@ -4,7 +4,7 @@ import React from 'react'
 import SearchField from './SearchField'
 import CenterView from '../CenterView/index'
 
-import { array, color, number, object, radios, select, text } from '@storybook/addon-knobs'
+import { number, object, select, text } from '@storybook/addon-knobs'
 import { storiesOf } from '@storybook/react-native'
 
 import { colors } from '../../Theme/Colors'
@@ -58,6 +58,11 @@ SearchFieldStories.add('Animated Search Filed other props', () => {
         onCancel={action('Function to call on cacel click')}
         maxLength={number('maxLength', 50)}
         keyboardType={select('keyboardType', Options, 'default', 'keyboardType')}
+        animatedContainerStyle={object('animatedContainerStyle', {})}
+        cancelTextStyle={object('cancelTextStyle', {})}
+        cancelAreaStyle={object('cancelTextStyle', {})}
+        searchAreaStyle={object('searchAreaStyle', {})}
+        txtContainerStyle={object('txtContainerStyle', {})}
       />
       <CustomButton
         btnSize='medium'
