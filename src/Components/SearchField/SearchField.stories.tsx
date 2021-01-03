@@ -34,12 +34,12 @@ SearchFieldStories.add('Basic Animated Search Filed', () => {
         ref={(ref: any) => (refSearchField = ref)}
         onTextChange={action('Function to be called on text change')}
       />
-      <CustomButton
+      {/* <CustomButton
         btnSize='medium'
         btnStyle={{ marginVertical: 40 }}
         title='Toggle Field'
         onPress={() => refSearchField.toggleAnimation()}
-      />
+      /> */}
     </>
   )
 })
