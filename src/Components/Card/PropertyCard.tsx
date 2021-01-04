@@ -5,6 +5,7 @@ import { fontFamily, sizes } from '../../Assets/Font'
 import Card from './Card'
 import { isTablet } from 'react-native-device-info'
 import Icon from 'react-native-vector-icons/EvilIcons'
+import CustomButton from '../Button/Button'
 interface PropertyCardProps {
     onPress: any
     lastUpdated: any
@@ -12,98 +13,106 @@ interface PropertyCardProps {
     fieldsCount: any
     totalArea: any
     areaUnit: any
+    editIcon?: string
+    enterIcon?: string
     onEditPress: any
     onEnterPress: any
 }
 
-interface PropertyCardState {
-}
+const CONVERSION_RATE = 2.47105
 
-export default class PropertyCard extends React.Component<PropertyCardProps, PropertyCardState> {
-    CONVERSION_RATE = 2.47105
-    constructor(props: PropertyCardProps) {
-        super(props);
-        this.state = {
-        }
-    }
-    getAreaByUnit = (area: any, unit: any) => {
-        let newUnit = 'ha'
-        if (!area || area === '--') {
-            return '--'
-        }
-        switch (newUnit) {
-            case 'ac':
-                return Number(area * this.CONVERSION_RATE).toFixed(2)
-            case 'ha':
-                return Number(area).toFixed(2)
-            default:
-                return Number(area).toFixed(2)
-        }
-    }
-    renderCropView() {
-        return (
-            <View style={PropertyCardStyles.areaCropView}>
-                <View style={PropertyCardStyles.areaView}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Icon
-                            name='property'
-                            size={sizes.size12}
-                            color={colors.gray2}
-                            style={{ marginLeft: 1, marginRight: sizes.size5 }}
-                        />
-                        <Text style={PropertyCardStyles.areaNoText}>{this.props.fieldsCount + ' areas'}</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Icon name='area' size={sizes.size12} color={colors.gray2} style={{ marginLeft: 1, marginRight: 5 }} />
-                        <Text ellipsizeMode='tail' numberOfLines={2} style={[PropertyCardStyles.areaNoText]}>
-                            {this.getAreaByUnit(this.props.totalArea, this.props.areaUnit) + ' ' + this.props.areaUnit}
-                        </Text>
-                    </View>
+const RenderCropView = (
+    fieldsCount: any,
+    totalArea: any,
+    areaUnit: any
+) => {
+    return (
+        <View style={PropertyCardStyles.areaCropView}>
+            <View style={PropertyCardStyles.areaView}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Icon
+                        name='property'
+                        size={sizes.size12}
+                        color={colors.gray2}
+                        style={{ marginLeft: 1, marginRight: sizes.size5 }}
+                    />
+                    <Text style={PropertyCardStyles.areaNoText}>{fieldsCount + ' areas'}</Text>
+                </View>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Icon name='area' size={sizes.size12} color={colors.gray2} style={{ marginLeft: 1, marginRight: 5 }} />
+                    <Text ellipsizeMode='tail' numberOfLines={2} style={[PropertyCardStyles.areaNoText]}>
+                        {getAreaByUnit(totalArea, areaUnit) + ' ' + areaUnit}
+                    </Text>
                 </View>
             </View>
-        )
+        </View>
+    )
+}
+
+const getAreaByUnit = (area: any, unit: any) => {
+    let newUnit = 'ha'
+    if (!area || area === '--') {
+        return '--'
     }
-    render() {
-        return (
-            <Card
-                onPress={this.props.onPress}
-                style={PropertyCardStyles.cardContainer}
-                children={
-                    <>
-                        <TouchableOpacity
-                            style={[PropertyCardStyles.cardTop]}
-                            onPress={this.props.onPress}>
-                            <View style={PropertyCardStyles.lastUpdatedView}>
-                                <Text style={PropertyCardStyles.lastUpdatedText}>{this.props.lastUpdated}</Text>
-                            </View>
-                            <View style={PropertyCardStyles.titleView}>
-                                <View style={PropertyCardStyles.lineView} />
-                                <Text style={PropertyCardStyles.titleText} numberOfLines={2}>
-                                    {this.props.propertyName}
-                                </Text>
-                            </View>
-                            {this.renderCropView()}
-                        </TouchableOpacity>
-                        <View style={PropertyCardStyles.cardBottom}>
-                            <TouchableOpacity
-                                style={PropertyCardStyles.editView}
-                                onPress={this.props.onEditPress}>
-                                <Text style={PropertyCardStyles.buttonText}>{'Edit'}</Text>
-                                <Icon name='edit' color={colors.green} size={sizes.size14} />
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={PropertyCardStyles.enterView}
-                                onPress={this.props.onEnterPress}>
-                                <Text style={PropertyCardStyles.buttonText}>{'Enter'}</Text>
-                                <Icon name='arrow-right' color={colors.green} size={sizes.size14} />
-                            </TouchableOpacity>
-                        </View>
-                    </>
-                }
-            />
-        )
+    switch (newUnit) {
+        case 'ac':
+            return Number(area * CONVERSION_RATE).toFixed(2)
+        case 'ha':
+            return Number(area).toFixed(2)
+        default:
+            return Number(area).toFixed(2)
     }
 }
+
+export const PropertyCard = ({
+    onPress,
+    lastUpdated,
+    propertyName,
+    fieldsCount,
+    totalArea,
+    areaUnit,
+    editIcon,
+    enterIcon,
+    onEditPress,
+    onEnterPress }: PropertyCardProps
+) => (
+        <Card
+            onPress={onPress}
+            style={PropertyCardStyles.cardContainer}
+            children={
+                <>
+                    <TouchableOpacity
+                        style={[PropertyCardStyles.cardTop]}
+                        onPress={onPress}>
+                        <View style={PropertyCardStyles.lastUpdatedView}>
+                            <Text style={PropertyCardStyles.lastUpdatedText}>{lastUpdated}</Text>
+                        </View>
+                        <View style={PropertyCardStyles.titleView}>
+                            <View style={PropertyCardStyles.lineView} />
+                            <Text style={PropertyCardStyles.titleText} numberOfLines={2}>
+                                {propertyName}
+                            </Text>
+                        </View>
+                        {RenderCropView(fieldsCount, totalArea, areaUnit)}
+                    </TouchableOpacity>
+                    <View style={PropertyCardStyles.cardBottom}>
+                        <CustomButton title={'Edit'} onPress={onEditPress} btnStyle={PropertyCardStyles.editView} >
+                            <Icon name={editIcon ? editIcon : 'edit'} color={colors.green} size={sizes.size14} />
+                        </CustomButton>
+                        <CustomButton title={'Enter'} onPress={onEnterPress} btnStyle={PropertyCardStyles.enterView} >
+                            <Icon name={enterIcon ? enterIcon : 'arrow-right'} color={colors.green} size={sizes.size14} />
+                        </CustomButton>
+                        {/* <TouchableOpacity
+                            style={PropertyCardStyles.enterView}
+                            onPress={onEnterPress}>
+                            <Text style={PropertyCardStyles.buttonText}>{'Enter'}</Text>
+                            <Icon name='arrow-right' color={colors.green} size={sizes.size14} />
+                        </TouchableOpacity> */}
+                    </View>
+                </>
+            }
+        />
+    )
 
 const PropertyCardStyles = StyleSheet.create({
     cardContainer: {
