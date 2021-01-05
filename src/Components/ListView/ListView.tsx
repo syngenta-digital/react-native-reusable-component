@@ -3,8 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet, FlatList, ViewStyle } from 'r
 
 import { colors } from '../../Theme/Colors'
 
-import Icon from 'react-native-vector-icons/EvilIcons'
 import PropTypes from 'prop-types'
+import { Icon } from '../../Theme/Icon'
 
 interface ListViewProps {
   list: any
@@ -60,7 +60,7 @@ const ListView = ({
           {!item.hideRightIcon && !hideRightIcon && (
             <View style={[styles.rightIconView, item.rightIconViewStyle]}>
               <Icon
-                name={item.rightIconName || rightIconName || 'chevron-right'}
+                name={item.rightIconName || rightIconName || 'arrowright'}
                 color={item.rightIconColor || rightIconColor || colors.grey40}
                 size={20}
               />

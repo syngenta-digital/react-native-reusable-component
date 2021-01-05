@@ -7,12 +7,10 @@ import CustomButton from '../Button/Button'
 import FacePile from '../FacePile/FacePile'
 import Card from '../Card/Card'
 
-import Icon from 'react-native-vector-icons/EvilIcons'
-import AntIcon from 'react-native-vector-icons/AntDesign'
-
 import { fonts } from '../../Theme/Fonts'
 import { colors } from '../../Theme/Colors'
 import { SIZES } from '../../Assets/Font'
+import { Icon } from '../../Theme/Icon'
 
 interface OrganizationCardProps {
   org: any
@@ -135,7 +133,7 @@ const OrganizationCard = ({ ...props }: OrganizationCardProps) => {
         <TouchableOpacity onPress={() => (onBottomCardClick ? onBottomCardClick(org) : {})}>
           <View style={styles.cardBottom}>
             <Text style={styles.accessText}>{bottomText}</Text>
-            <AntIcon name='right' size={16} color={colors.grey40} />
+            <Icon name='right' size={16} color={colors.grey40} />
           </View>
         </TouchableOpacity>
       )}

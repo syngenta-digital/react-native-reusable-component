@@ -7,8 +7,7 @@ import { colors } from '../../Theme/Colors'
 import SyncDetails from '../SyncIcon/SyncDetails'
 import RenderSyncIcon from '../SyncIcon/SyncIcon'
 import Card from '../Card/Card'
-
-import Icon from 'react-native-vector-icons/EvilIcons'
+import { Icon } from '../../Theme/Icon'
 
 interface SeasonsCardProps {
   season: any

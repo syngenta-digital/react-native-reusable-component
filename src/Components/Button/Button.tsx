@@ -4,8 +4,8 @@ import { TouchableOpacity, Text, StyleSheet, ViewStyle } from 'react-native'
 import { colors } from '../../Theme/Colors'
 import { SIZES } from '../../Assets/Font'
 
-import Icon from 'react-native-vector-icons/FontAwesome5'
 import PropTypes from 'prop-types'
+import { Icon } from '../../Theme/Icon'
 
 interface Props {
   title?: string

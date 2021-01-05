@@ -1,7 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, View, StyleSheet, ViewStyle } from 'react-native'
-import Icon from 'react-native-vector-icons/EvilIcons'
 import { colors } from '../../Theme/Colors'
+import { Icon } from '../../Theme/Icon'
 
 interface props {
   syncStatus: string

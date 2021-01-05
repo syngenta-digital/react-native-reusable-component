@@ -12,8 +12,8 @@ import { fontFamily, SIZES } from '../../Assets/Font'
 import { BarChart, XAxis, YAxis, Grid } from 'react-native-svg-charts'
 import Svg, { G, Text as SvgText } from 'react-native-svg'
 import LinearGradient from 'react-native-linear-gradient'
-import Icon from 'react-native-vector-icons/EvilIcons'
 import { isTablet } from 'react-native-device-info'
+import { Icon } from '../../Theme/Icon'
 
 interface Props {
   graphData: Array<any>
@@ -129,7 +129,7 @@ const Histogram = ({
             {histogramText}
           </Text>
           <Icon
-            name='arrow-up'
+            name='indicateUp'
             style={{
               transform: [{ rotate: refSlideArea?.state?.visibility ? '90deg' : '-90deg' }],
               marginHorizontal: SIZES(5),

@@ -6,8 +6,7 @@ import Card from '../Card/Card'
 import { colors } from '../../Theme/Colors'
 import { SIZES } from '../../Assets/Font'
 import AppStyles from '../../Utility/AppStyles'
-
-import Icon from 'react-native-vector-icons/EvilIcons'
+import { Icon } from '../../Theme/Icon'
 
 interface FieldCardProps {
   syncError?: any
@@ -56,7 +55,7 @@ const FieldCard = ({
           <Text numberOfLines={1} style={styles.errorText}>
             {syncErrorText}: {errorDescription}
           </Text>
-          <Icon name='arrow-right' size={SIZES(14)} color={colors.baseRed} />
+          <Icon name='indicationRight' size={SIZES(14)} color={colors.baseRed} />
         </TouchableOpacity>
       )}
       <Text numberOfLines={1} style={[styles.titleText, fieldTitleStyle]}>
