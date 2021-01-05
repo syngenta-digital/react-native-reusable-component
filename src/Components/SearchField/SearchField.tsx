@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Animated, Easing, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 import { isTablet } from 'react-native-device-info'
-import Icon from 'react-native-vector-icons/EvilIcons'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
 import { SIZES } from '../../Assets/Font'
 import { colors } from '../../Theme/Colors'
@@ -116,7 +116,7 @@ const SearchField = ({ ...props }: searchProps) => {
           {imagePath?.name ? (
             <Image source={{ uri: imagePath?.name }} style={[styles.clearSearchIcon, imagePath?.style]} />
           ) : (
-            <Icon name={clearIcon?.name} size={16 || clearIcon?.size} color={clearIcon?.color} />
+            <Icon name={clearIcon?.name} size={20 || clearIcon?.size} color={clearIcon?.color} />
           )}
         </TouchableOpacity>
       </View>
@@ -141,7 +141,7 @@ SearchField.defaultProps = {
   searchOnSubmit: () => {},
   onTextChange: () => {},
   clearSearchResult: () => {},
-  clearIcon: { name: 'search', size: 16, color: colors.grey20 }
+  clearIcon: { name: 'times', size: SIZES(20), color: colors.grey60 }
 }
 
 export default SearchField
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     borderRadius: SIZES(50)
   },
   clear: {
-    marginLeft: SIZES(5),
+    marginRight: 10,
     height: isTablet() ? SIZES(55) : SIZES(40),
     justifyContent: 'center'
   },

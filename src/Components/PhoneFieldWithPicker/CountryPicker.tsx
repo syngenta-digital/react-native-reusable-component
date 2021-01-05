@@ -109,7 +109,7 @@ export default class CountryPicker extends Component<CountryProps, CountryState>
             <View style={styles.filterInputStyleContainer}>
               <TextInput
                 onChangeText={this.filterCountries}
-                placeholder={this.props.textFieldPlaceholder ? this.props.textFieldPlaceholder : 'Search Country'}
+                placeholder={this.props?.textFieldPlaceholder || 'Search Country'}
                 style={styles.countryModalStyle}
               />
             </View>
