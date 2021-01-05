@@ -1,36 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity, ViewStyle, Alert } from 'react-native'
 
 import { fontFamily, SIZES } from '../../Assets/Font'
-import { formatDate } from '../../Utility/DatFormat'
 import { colors } from '../../Theme/Colors'
+
+import SyncDetails from '../SyncIcon/SyncDetails'
 import RenderSyncIcon from '../SyncIcon/SyncIcon'
 import Card from '../Card/Card'
 
 import Icon from 'react-native-vector-icons/EvilIcons'
 
 interface SeasonsCardProps {
-  onEdit: (data?: any) => void
-  onDelete?: (data?: any) => void
-  cropIcon: any
-  imageURI?: any
-  data?: any
-  cardAtSettings?: boolean
   season: any
-  cropImageViewStyle?: ViewStyle
-  cropImageStyle?: any
+  cropIcon: any
+  onEdit: (data?: any) => void
   startDateTitle: string
   endDateTitle: string
-  startDate: string
-  endDate: string
   editTitle: string
   deleteTitle?: string
+  onDelete?: (data?: any) => void
+  imageURI?: any
+  cardAtSettings?: boolean
+  cropImageViewStyle?: ViewStyle
+
+  //Sync Props
+  cropImageStyle?: any
   syncStatus: string
+  syncMsgText: string
+  errorInRequest?: string
+  viewMoreErrors?: () => void
+
+  //Styling
   seasonTitleStyle?: ViewStyle
   dotStyle?: ViewStyle
   dateTitleStyle?: ViewStyle
   dateTxtStyle?: ViewStyle
   editTextStyle?: ViewStyle
+  disableCardClick?: boolean
 }
 
 const SeasonsCard = ({
@@ -43,8 +49,6 @@ const SeasonsCard = ({
   startDateTitle,
   endDateTitle,
   cropIcon,
-  startDate,
-  endDate,
   deleteTitle,
   seasonTitleStyle,
   dateTitleStyle,
@@ -53,10 +57,15 @@ const SeasonsCard = ({
   onDelete,
   editTitle,
   dotStyle,
-  syncStatus
+  syncStatus,
+  syncMsgText,
+  errorInRequest,
+  viewMoreErrors,
+  disableCardClick
 }: SeasonsCardProps) => {
+  const [isSyncMsgVisible, setSyncVisibility] = useState(false)
   return (
-    <Card style={styles.cardContainer}>
+    <Card style={styles.cardContainer} disabled={disableCardClick} onPress={() => setSyncVisibility(false)}>
       <View style={[styles.cardTop, !cardAtSettings ? styles.bottomGreyBorder : styles.bottomMargin]}>
         <View style={[styles.cropImage, cropImageViewStyle]}>
           {!imageURI ? (
@@ -75,7 +84,14 @@ const SeasonsCard = ({
             <Text style={[styles.titleText, seasonTitleStyle]} numberOfLines={2}>
               {season?.name}
             </Text>
-            <RenderSyncIcon syncStatus={syncStatus} />
+            <RenderSyncIcon syncStatus={syncStatus} onPress={() => setSyncVisibility(!isSyncMsgVisible)} />
+            <SyncDetails
+              errorInRequest={errorInRequest}
+              viewMoreErrors={viewMoreErrors}
+              isVisible={isSyncMsgVisible}
+              syncStatus={syncStatus}
+              syncMsgText={syncMsgText}
+            />
           </View>
 
           <View style={[styles.areaCropView]}>
@@ -90,7 +106,7 @@ const SeasonsCard = ({
                   {startDateTitle}
                 </Text>
                 <Text numberOfLines={1} style={[styles.dateTxt, dateTxtStyle]}>
-                  {startDate}
+                  {season?.startDate}
                 </Text>
               </View>
               <View style={{ marginLeft: SIZES(8) }}>
@@ -98,7 +114,7 @@ const SeasonsCard = ({
                   {endDateTitle}
                 </Text>
                 <Text numberOfLines={1} style={[styles.dateTxt, dateTxtStyle]}>
-                  {endDate}
+                  {season?.endDate}
                 </Text>
               </View>
             </View>
@@ -143,9 +159,8 @@ SeasonsCard.defaultProps = {
   editTitle: 'Edit',
   deleteTitle: 'Delete',
   syncStatus: 'none',
-  onEdit: () => Alert.alert('Warning', 'Add Edit function'),
-  startDate: formatDate(new Date(), 'DD/MM/YYYY'),
-  endDate: formatDate(new Date(), 'DD/MM/YYYY')
+  syncMsgText: '',
+  onEdit: () => Alert.alert('Warning', 'Add Edit function')
 }
 
 const styles = StyleSheet.create({
@@ -177,6 +192,7 @@ const styles = StyleSheet.create({
   },
   subView: { flexDirection: 'column', flex: 2 },
   titleText: {
+    flex: 1,
     fontSize: 17,
     fontFamily: fontFamily.notosans_semibold,
     flexDirection: 'row',

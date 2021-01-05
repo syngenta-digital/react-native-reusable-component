@@ -58,6 +58,7 @@ const OrganizationCard = ({ ...props }: OrganizationCardProps) => {
     syncStatus,
     syncMsgText,
     viewMoreErrors,
+    errorInRequest,
     defaultCropIconName
   } = props
   let cropIconsArray: string[] = []
@@ -81,7 +82,7 @@ const OrganizationCard = ({ ...props }: OrganizationCardProps) => {
           )}
         </View>
         <SyncDetails
-          errorInRequest={''}
+          errorInRequest={errorInRequest}
           viewMoreErrors={viewMoreErrors}
           isVisible={isSyncMsgVisible}
           syncStatus={syncStatus}
