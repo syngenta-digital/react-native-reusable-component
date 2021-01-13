@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Animated, Easing, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 import { isTablet } from 'react-native-device-info'
-import Icon from 'react-native-vector-icons/EvilIcons'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
 import { SIZES } from '../../Assets/Font'
 import { colors } from '../../Theme/Colors'
@@ -25,6 +25,7 @@ interface searchProps {
   cancelTextStyle?: any
   clearIcon?: any
   inputFieldProps?: any
+  ref?: any
 }
 
 const SearchField = ({ ...props }: searchProps) => {
@@ -43,6 +44,7 @@ const SearchField = ({ ...props }: searchProps) => {
     imagePath,
     cancelTextStyle,
     cancelAreaStyle,
+    keyboardType,
     clearIcon
   } = props
   const [showValues, setValues] = useState({ searchText: '', activeSearch: true })
@@ -99,6 +101,7 @@ const SearchField = ({ ...props }: searchProps) => {
           autoCorrect={false}
           value={showValues.searchText}
           maxLength={maxLength}
+          keyboardType={keyboardType || 'default'}
           returnKeyLabel='search'
           returnKeyType='search'
           onSubmitEditing={() => searchOnSubmit(showValues.searchText)}
@@ -111,9 +114,9 @@ const SearchField = ({ ...props }: searchProps) => {
             clearSearchResult()
           }}>
           {imagePath?.name ? (
-            <Image source={imagePath.name} style={[styles.clearSearchIcon, imagePath?.style]} />
+            <Image source={{ uri: imagePath?.name }} style={[styles.clearSearchIcon, imagePath?.style]} />
           ) : (
-            <Icon name={clearIcon?.name} size={16 || clearIcon?.size} color={colors.grey20} />
+            <Icon name={clearIcon?.name} size={20 || clearIcon?.size} color={clearIcon?.color} />
           )}
         </TouchableOpacity>
       </View>
@@ -138,7 +141,7 @@ SearchField.defaultProps = {
   searchOnSubmit: () => {},
   onTextChange: () => {},
   clearSearchResult: () => {},
-  clearIcon: { name: 'search', size: 16 }
+  clearIcon: { name: 'times', size: SIZES(20), color: colors.grey60 }
 }
 
 export default SearchField
@@ -154,7 +157,7 @@ const styles = StyleSheet.create({
     borderRadius: SIZES(50)
   },
   clear: {
-    marginLeft: SIZES(5),
+    marginRight: 10,
     height: isTablet() ? SIZES(55) : SIZES(40),
     justifyContent: 'center'
   },
@@ -182,8 +185,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   clearSearchIcon: {
-    width: SIZES(20),
-    height: SIZES(20)
+    width: '100%',
+    height: '100%'
   },
   border: {
     borderWidth: isTablet() ? 1 : 0.5,
@@ -191,6 +194,7 @@ const styles = StyleSheet.create({
   },
   cancelTxt: {
     fontSize: isTablet() ? SIZES(16) : SIZES(14),
-    color: colors.green80
+    color: colors.green80,
+    alignSelf: 'center'
   }
 })

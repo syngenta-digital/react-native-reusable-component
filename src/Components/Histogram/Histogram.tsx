@@ -16,19 +16,18 @@ import Icon from 'react-native-vector-icons/EvilIcons'
 import { isTablet } from 'react-native-device-info'
 
 interface Props {
+  graphData: Array<any>
+  dataY: Array<any>
+  dataX: Array<any>
+  yMax: any
   totalHistogramArea: number | string
   chartBgHeight: number
   title: string
   histogramText: string
-  dataY: Array<any>
-  datax: Array<any>
-  graphData: Array<any>
-  yMax: any
   noGraphTextStyle?: any
   noGraphData?: string | ''
   highTitle?: string | 'High'
   lowTitle?: string | 'Low'
-  children?: React.ReactNode
   gradientColorsArray: Array<any> | []
   barchartAreaStyle?: ViewStyle
   sliderAreaStyle?: ViewStyle
@@ -85,7 +84,7 @@ const Histogram = ({
   dataY,
   graphData,
   yMax,
-  datax,
+  dataX,
   areaUnit,
   areaLable,
   gradientColorsArray,
@@ -203,7 +202,7 @@ const Histogram = ({
                     borderTopColor: colors.gray3,
                     height: SIZES(40)
                   }}
-                  data={datax}
+                  data={dataX}
                   xAccessor={({ item }: any) => item}
                   formatLabel={(value: any) => value}
                   contentInset={{
@@ -236,10 +235,8 @@ Histogram.defaultProps = {
   lowTitle: 'Low',
   highTitle: 'High',
   graphData: [],
-  datax: [],
-  dataY: [],
+  dataX: [],
   noGraphData: 'Data Not Available',
-  yMax: 40,
   areaLable: '',
   areaUnit: '',
   gradientColorsArray: [colors.damageRed, colors.yellow, '#ABB926', colors.green90]

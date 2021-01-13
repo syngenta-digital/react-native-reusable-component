@@ -13,13 +13,13 @@ interface FieldCardProps {
   syncError?: any
   syncErrorText?: string
   errorDescription?: string
-  errorNavigation: () => {}
+  errorNavigation: () => void
   field: any
   subtitle?: string
   noBoundaryAlertText?: string
   children?: React.ReactNode
+  leftIconViewStyle?: any
   containerStyle?: any
-  leftIconView?: any
   fieldDetailsStyle?: any
   errorViewStyle?: any
   fieldTitleStyle?: any
@@ -38,7 +38,7 @@ const FieldCard = ({
   children,
   noBoundaryAlertText,
   containerStyle,
-  leftIconView,
+  leftIconViewStyle,
   fieldDetailsStyle,
   errorViewStyle,
   fieldTitleStyle,
@@ -46,8 +46,8 @@ const FieldCard = ({
   boundryDescStyle,
   actionAreaStyle
 }: FieldCardProps) => (
-  <Card style={containerStyle || styles.cardStyle}>
-    <View style={[styles.fieldIconView, leftIconView]}>
+  <Card style={Object.assign(styles.cardStyle, containerStyle)}>
+    <View style={[styles.fieldIconView, leftIconViewStyle]}>
       <Icon name='location' color={colors.blue} size={SIZES(20)} />
     </View>
     <View style={[styles.detailView, fieldDetailsStyle]}>
@@ -56,7 +56,7 @@ const FieldCard = ({
           <Text numberOfLines={1} style={styles.errorText}>
             {syncErrorText}: {errorDescription}
           </Text>
-          <Icon name='arrow' size={SIZES(14)} color={colors.baseRed} />
+          <Icon name='arrow-right' size={SIZES(14)} color={colors.baseRed} />
         </TouchableOpacity>
       )}
       <Text numberOfLines={1} style={[styles.titleText, fieldTitleStyle]}>
@@ -77,7 +77,8 @@ const FieldCard = ({
 
 FieldCard.defaultProps = {
   errorNavigation: () => {},
-  field: {}
+  field: {},
+  noBoundaryAlertText: 'No Boundary Added'
 }
 
 export default FieldCard

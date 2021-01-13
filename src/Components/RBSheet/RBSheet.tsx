@@ -23,8 +23,8 @@ interface RBSheetProps {
   closeOnPressBack: boolean
   keyboardAvoidingViewEnabled: boolean
   customStyles: any
-  onClose: (data: any) => {}
-  onOpen: (data: any) => {}
+  onClose: (data: any) => void
+  onOpen: (data: any) => void
   children: ReactNode
 }
 

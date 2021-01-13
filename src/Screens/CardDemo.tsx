@@ -57,7 +57,8 @@ const CardDemo = () => {
         }}
         onPress={() => {
           setValues({ showAlertOnScreen: true, showUserName: 'PropertyCard Component' })
-        }} />
+        }}
+      />
       <OrganizationCard
         org={org}
         DEFAULT_CROP_ICON_NAME={'settings'}

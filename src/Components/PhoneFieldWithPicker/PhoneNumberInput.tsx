@@ -1,25 +1,3 @@
-/**
- * 
- * PhoneTextField support Country code and phone number
- * user can select Country from picker view and enter upto Max limit of number 
- *
- * Use Case 
- *  
- * <View style={{ flexDirection: 'row', borderColor: colors.grey20, alignContent: 'center' }}>
-        <PhoneNumberInput
-          validPhoneCallback={phoneNumberCallback}
-          phone_number={'+20 888 888 6754'}
-          successColor={colors.green70}
-          inputTextColor={colors.blue50}
-          errorColor={colors.grey40}
-        />
-      </View>
- * 
- *  @param validPhoneCallback 
- * validPhoneCallback function is callback it return two values (boolean value is phone is valid or not, and phone number entered by user)
- *  
- */
-
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native'
 import { colors } from '../../Theme/Colors'
@@ -33,7 +11,7 @@ interface PhoneNumberInputProps {
   validPhoneCallback: any // callback
   phone_number?: any // + country_code xxx xxx xxxx
   defaultCountryCode?: string // IN
-  inputFieldPlaceholder?: string
+  inputFieldPlaceholder: string
   labelText?: string
   errorLabelText?: string
   phoneNumberLength?: number
@@ -55,8 +33,14 @@ interface PhoneNumberInputState {
   inputFieldPlaceholder: string
 }
 
-export default class PhoneNumberInput extends Component<PhoneNumberInputProps, PhoneNumberInputState> {
+class PhoneNumberInput extends Component<PhoneNumberInputProps, PhoneNumberInputState> {
   myCountryPicker: any
+  static defaultProps: {
+    successColor: string
+    errorColor: string
+    errorLabelText: string
+    inputFieldPlaceholder: string
+  }
   constructor(props: PhoneNumberInputProps) {
     super(props)
     let { phone_number, defaultCountryCode, inputFieldPlaceholder, phoneNumberLength } = this.props
@@ -74,7 +58,7 @@ export default class PhoneNumberInput extends Component<PhoneNumberInputProps, P
 
     defaultCountryCode && (defaultCountry = defaultCountryCode)
 
-    countryCode = dialCode !== undefined && dialCode !== '' ? this.getIsoCOde(dialCode, defaultCountry) : defaultCountry
+    countryCode = dialCode ? this.getIsoCOde(dialCode, defaultCountry) : defaultCountry
     let country = this.getCountryFromList(countryCode)
 
     this.state = {
@@ -87,7 +71,7 @@ export default class PhoneNumberInput extends Component<PhoneNumberInputProps, P
       hasFocus: false,
       pickerData: [],
       defaultCountryCode: defaultCountry,
-      inputFieldPlaceholder: inputFieldPlaceholder ? inputFieldPlaceholder : 'Phone Number'
+      inputFieldPlaceholder: inputFieldPlaceholder
     }
   }
 
@@ -145,26 +129,27 @@ export default class PhoneNumberInput extends Component<PhoneNumberInputProps, P
 
   getCountryFromDialCodeList = (dialCode: any) => {
     return Countries.find((country: any) => {
+      // eslint-disable-next-line eqeqeq
       return country.dialCode == dialCode
     })
   }
 
   render() {
-    const { validCountry, validPhone } = this.state
+    const { validCountry, validPhone, hasFocus, dialCode, phoneNumber, inputFieldPlaceholder } = this.state
     const { errorLabelText, labelText, inputTextColor, errorColor, successColor } = this.props
 
-    let topLabelText = labelText ? labelText : this.state.inputFieldPlaceholder
-    const errorMessageText = errorLabelText ? errorLabelText : 'Invalid phone number'
+    let topLabelText = labelText || this.state.inputFieldPlaceholder
+    const errorMessageText = errorLabelText
 
-    const successBorderColor = { borderColor: successColor ? successColor : colors.blue50 }
-    const errorBorderColor = { borderColor: errorColor ? errorColor : colors.red50 }
+    const successBorderColor = { borderColor: successColor }
+    const errorBorderColor = { borderColor: errorColor }
 
     return (
       <View style={styles.mainContainer}>
         <Text style={styles.labelTextStyle}>{topLabelText}</Text>
         <View
           style={
-            this.state.hasFocus
+            hasFocus
               ? validCountry && validPhone
                 ? [styles.container, successBorderColor]
                 : [styles.container, errorBorderColor]
@@ -178,34 +163,27 @@ export default class PhoneNumberInput extends Component<PhoneNumberInputProps, P
               <Text style={styles.verticalSeparator} />
               <TextInput
                 style={[styles.countryCodeField, { color: inputTextColor ? inputTextColor : colors.blue50 }]}
-                value={
-                  this.state.dialCode.includes('+')
-                    ? '+' + this.state.dialCode.replace('+', '')
-                    : '+' + this.state.dialCode
-                }
-                placeholder={this.state.dialCode}
+                value={dialCode.includes('+') ? '+' + dialCode.replace('+', '') : '+' + dialCode}
+                placeholder={dialCode}
                 keyboardType='phone-pad'
                 maxLength={5}
                 onChangeText={text => {
                   text = text.replace(/[^+0-9 ]/g, '').trim()
-                  let dialCode = text
-                  let country = this.getCountryFromDialCodeList(dialCode)
+                  let dialCodeText = text
+                  let country = this.getCountryFromDialCodeList(dialCodeText)
 
                   let validate = text
                   validate = validate.replace('+', '')
 
                   this.setState(
                     {
-                      dialCode: dialCode,
+                      dialCode: dialCodeText,
                       validCountry: validate.trim().length === 0 ? false : true,
                       countryCode: country ? country.code : 'UNKNOWN',
                       flag: country ? country.flag : '🏳️'
                     },
                     () => {
-                      this.props.validPhoneCallback(
-                        this.state.validCountry && this.state.validPhone,
-                        this.state.dialCode + ' ' + this.state.phoneNumber
-                      )
+                      this.props.validPhoneCallback(validCountry && validPhone, dialCode + ' ' + phoneNumber)
                     }
                   )
                 }}
@@ -218,14 +196,14 @@ export default class PhoneNumberInput extends Component<PhoneNumberInputProps, P
             <TextInput
               style={[styles.phoneTextfield, { color: inputTextColor ? inputTextColor : colors.blue50 }]}
               keyboardType='number-pad'
-              placeholder={this.state.inputFieldPlaceholder}
+              placeholder={inputFieldPlaceholder}
               autoCorrect={false}
               secureTextEntry={false}
               maxLength={PHONE_NUMBER_LENGTH}
-              value={this.state.phoneNumber}
-              onChangeText={phoneNumber => {
-                let match = phoneNumber.match(PHONE_NUMBER_REGEX)
-                let number = phoneNumber
+              value={phoneNumber}
+              onChangeText={phoneNumberValue => {
+                let match = phoneNumberValue.match(PHONE_NUMBER_REGEX)
+                let number = phoneNumberValue
                 if (match) {
                   number = [match[1], ' ', match[2], ' ', match[3]].join('')
                 }
@@ -258,6 +236,15 @@ export default class PhoneNumberInput extends Component<PhoneNumberInputProps, P
   }
 }
 
+PhoneNumberInput.defaultProps = {
+  successColor: colors.blue50,
+  errorColor: colors.red50,
+  errorLabelText: 'Invalid Phone Number',
+  inputFieldPlaceholder: 'Phone Number'
+}
+
+export default PhoneNumberInput
+
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1
@@ -284,14 +271,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'flex-end',
     marginVertical: 3
-  },
-  imagesView: {
-    alignSelf: 'center',
-    paddingRight: 4
-  },
-  image: {
-    height: 16,
-    width: 16
   },
   errorLabelStyle: {
     flexDirection: 'row',
