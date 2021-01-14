@@ -77,10 +77,10 @@ FacePileStories.add('Circles with different BG colors', () => (
 
 FacePileStories.add('FacePile for Icons', () => (
   <FacePile
-    array={array('array', ['arrow-up', 'calendar', 'arrow-right', 'clock'])}
+    array={array('array', ['apple', 'calendar', 'acerolacherry', 'clock'])}
     circleBgColor={color('circleBgColor', colors.grey20)}
     circleStyle={object('circleStyle', {})}
-    maxCircleValue={number('maxCircleValue', 2)}
+    maxCircleValue={number('maxCircleValue', 3)}
     colorsArray={[colors.red50, colors.green50, colors.blue50, colors.syngenta_green]}
     type={select(
       'type',

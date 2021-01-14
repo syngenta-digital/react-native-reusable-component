@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, ViewStyle } from 'react-native'
 
 import { colors } from '../../Theme/Colors'
+import { Icon } from '../../Theme/Icon'
 
 import PropTypes from 'prop-types'
 import { Icon } from '../../Theme/Icon'
@@ -60,7 +61,7 @@ const ListView = ({
           {!item.hideRightIcon && !hideRightIcon && (
             <View style={[styles.rightIconView, item.rightIconViewStyle]}>
               <Icon
-                name={item.rightIconName || rightIconName || 'arrowright'}
+                name={item.rightIconName || rightIconName || 'indicationRight'}
                 color={item.rightIconColor || rightIconColor || colors.grey40}
                 size={20}
               />

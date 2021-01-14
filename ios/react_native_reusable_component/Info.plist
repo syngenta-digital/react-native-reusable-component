@@ -55,11 +55,11 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Cropwise.ttf</string>
 		<string>NotoSans-Regular.ttf</string>
 		<string>NotoSans-SemiBold.ttf</string>
 		<string>SansitaSwashed-VariableFont_wght.ttf</string>
 		<string>SansitaSwashed-Regular.ttf</string>
+		<string>Reusable-Components.ttf</string>
 	</array>
 </dict>
 </plist>

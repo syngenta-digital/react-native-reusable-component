@@ -4,7 +4,7 @@ import { colors } from '../../Theme/Colors'
 import { fontFamily, sizes } from '../../Assets/Font'
 import Card from './Card'
 import { isTablet } from 'react-native-device-info'
-import Icon from 'react-native-vector-icons/EvilIcons'
+import { Icon } from '../../Theme/Icon'
 interface PropertyCardProps {
   onPress: any
   lastUpdated: any
@@ -87,7 +87,7 @@ export default class PropertyCard extends React.Component<PropertyCardProps, Pro
               </TouchableOpacity>
               <TouchableOpacity style={PropertyCardStyles.enterView} onPress={this.props.onEnterPress}>
                 <Text style={PropertyCardStyles.buttonText}>{'Enter'}</Text>
-                <Icon name='arrow-right' color={colors.green} size={sizes.size14} />
+                <Icon name='arrowright' color={colors.green} size={sizes.size14} />
               </TouchableOpacity>
             </View>
           </>

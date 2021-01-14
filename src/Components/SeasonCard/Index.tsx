@@ -3,11 +3,11 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, ViewStyle, Alert } fro
 
 import { fontFamily, SIZES } from '../../Assets/Font'
 import { colors } from '../../Theme/Colors'
+import { Icon } from '../../Theme/Icon'
 
 import SyncDetails from '../SyncIcon/SyncDetails'
 import RenderSyncIcon from '../SyncIcon/SyncIcon'
 import Card from '../Card/Card'
-import { Icon } from '../../Theme/Icon'
 
 interface SeasonsCardProps {
   season: any
@@ -151,7 +151,7 @@ const SeasonsCard = ({
 }
 
 SeasonsCard.defaultProps = {
-  cropIconName: 'settings',
+  cropIconName: 'seasonsTab',
   cropImageStyle: {},
   startDateTitle: 'Start',
   endDateTitle: 'End',

@@ -95,12 +95,12 @@ const OrganizationCard = ({ ...props }: OrganizationCardProps) => {
         ) : (
           <View>
             <View style={styles.propertyView}>
-              <Icon name='location' size={SIZES(16)} color={colors.grey20} />
+              <Icon name='property' size={SIZES(16)} color={colors.grey70} />
               <Text style={styles.propertyText}>{String(org?.properties?.length || '0') + ' ' + propertiesTitle}</Text>
             </View>
             <View style={styles.landView}>
               <View style={styles.areaView}>
-                <Icon name='share-google' size={SIZES(16)} color={colors.grey20} />
+                <Icon name='area' size={SIZES(16)} color={colors.grey70} />
                 <Text numberOfLines={1} style={styles.areaText} ellipsizeMode='tail'>
                   {org?.area || '--'}
                 </Text>
@@ -133,7 +133,7 @@ const OrganizationCard = ({ ...props }: OrganizationCardProps) => {
         <TouchableOpacity onPress={() => (onBottomCardClick ? onBottomCardClick(org) : {})}>
           <View style={styles.cardBottom}>
             <Text style={styles.accessText}>{bottomText}</Text>
-            <Icon name='right' size={16} color={colors.grey40} />
+            <Icon name='arrowright' size={16} color={colors.grey30} />
           </View>
         </TouchableOpacity>
       )}

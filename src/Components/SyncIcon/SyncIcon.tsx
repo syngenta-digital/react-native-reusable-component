@@ -47,6 +47,6 @@ const SeasonCardStyles = StyleSheet.create({
     borderRadius: 24,
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'flex-start'
+    alignSelf: 'center'
   }
 })

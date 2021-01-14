@@ -47,7 +47,7 @@ FieldCardStories.add('Other FieldCard Features', () => (
 FieldCardStories.add('FieldCard With Error Description', () => (
   <FieldCard
     field={object('field', { name: 'This id field title' })}
-    subtitle={text('subtitle', 'Click on error to check click event')}
+    subtitle={text('subtitle', 'Click on error Desc...')}
     children={
       <TouchableOpacity onPress={() => Alert.alert('alert', 'Click Event')}>
         <Text>Click Me!</Text>
