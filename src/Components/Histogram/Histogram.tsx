@@ -14,7 +14,6 @@ import { BarChart, XAxis, YAxis, Grid } from 'react-native-svg-charts'
 import Svg, { G, Text as SvgText } from 'react-native-svg'
 import LinearGradient from 'react-native-linear-gradient'
 import { isTablet } from 'react-native-device-info'
-import { Icon } from '../../Theme/Icon'
 
 interface Props {
   graphData: Array<any>

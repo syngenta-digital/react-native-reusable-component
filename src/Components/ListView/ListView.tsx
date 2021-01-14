@@ -5,7 +5,6 @@ import { colors } from '../../Theme/Colors'
 import { Icon } from '../../Theme/Icon'
 
 import PropTypes from 'prop-types'
-import { Icon } from '../../Theme/Icon'
 
 interface ListViewProps {
   list: any
