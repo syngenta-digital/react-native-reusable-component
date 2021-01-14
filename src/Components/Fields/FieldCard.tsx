@@ -6,8 +6,7 @@ import Card from '../Card/Card'
 import { colors } from '../../Theme/Colors'
 import { SIZES } from '../../Assets/Font'
 import AppStyles from '../../Utility/AppStyles'
-
-import Icon from 'react-native-vector-icons/EvilIcons'
+import { Icon } from '../../Theme/Icon'
 
 interface FieldCardProps {
   syncError?: any
@@ -48,7 +47,7 @@ const FieldCard = ({
 }: FieldCardProps) => (
   <Card style={Object.assign(styles.cardStyle, containerStyle)}>
     <View style={[styles.fieldIconView, leftIconViewStyle]}>
-      <Icon name='location' color={colors.blue} size={SIZES(20)} />
+      <Icon name='area' color={colors.blue} size={SIZES(20)} />
     </View>
     <View style={[styles.detailView, fieldDetailsStyle]}>
       {syncError && syncError.length && (
@@ -56,17 +55,17 @@ const FieldCard = ({
           <Text numberOfLines={1} style={styles.errorText}>
             {syncErrorText}: {errorDescription}
           </Text>
-          <Icon name='arrow-right' size={SIZES(14)} color={colors.baseRed} />
+          <Icon name='arrowright' size={SIZES(14)} color={colors.baseRed} />
         </TouchableOpacity>
       )}
       <Text numberOfLines={1} style={[styles.titleText, fieldTitleStyle]}>
         {field.name}
       </Text>
       <Text numberOfLines={2} style={[styles.subTitleText, subTitleStyle]}>
-        {subtitle}
+        {subtitle + ' '}
         {!field.geometry && (
           <Text numberOfLines={2} style={[styles.textView, boundryDescStyle]}>
-            {'  (' + noBoundaryAlertText + ')'}
+            {'(' + noBoundaryAlertText + ')'}
           </Text>
         )}
       </Text>

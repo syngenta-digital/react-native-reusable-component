@@ -7,7 +7,10 @@ import { storiesOf } from '@storybook/react-native'
 import { action } from '@storybook/addon-actions'
 
 const OrganizationCardStories = storiesOf('OrganizationCard Story', module)
-OrganizationCardStories.addDecorator((getStory: any) => <CenterView>{getStory()}</CenterView>)
+OrganizationCardStories.addDecorator((getStory: any) => (
+  // eslint-disable-next-line react-native/no-inline-styles
+  <CenterView customStyle={{ paddingHorizontal: 15 }}>{getStory()}</CenterView>
+))
 
 OrganizationCardStories.add('Org Card to download', () => (
   <OrgCard

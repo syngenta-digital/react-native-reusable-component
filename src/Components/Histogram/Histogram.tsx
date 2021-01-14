@@ -8,11 +8,11 @@ import Tooltip from './Tooltip'
 
 import { colors } from '../../Theme/Colors'
 import { fontFamily, SIZES } from '../../Assets/Font'
+import { Icon } from '../../Theme/Icon'
 
 import { BarChart, XAxis, YAxis, Grid } from 'react-native-svg-charts'
 import Svg, { G, Text as SvgText } from 'react-native-svg'
 import LinearGradient from 'react-native-linear-gradient'
-import Icon from 'react-native-vector-icons/EvilIcons'
 import { isTablet } from 'react-native-device-info'
 
 interface Props {
@@ -129,14 +129,14 @@ const Histogram = ({
             {histogramText}
           </Text>
           <Icon
-            name='arrow-up'
+            name='arrowright'
             style={{
               transform: [{ rotate: refSlideArea?.state?.visibility ? '90deg' : '-90deg' }],
               marginHorizontal: SIZES(5),
               marginLeft: SIZES(10)
             }}
             color={colors.white}
-            size={15}
+            size={13}
           />
         </TouchableOpacity>
       </View>

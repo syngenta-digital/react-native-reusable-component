@@ -3,9 +3,9 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
 
 import { colors } from '../../Theme/Colors'
 
-import Icon from 'react-native-vector-icons/EvilIcons'
 import PropTypes from 'prop-types'
 import { SIZES } from '../../Assets/Font'
+import { Icon } from '../../Theme/Icon'
 
 interface Props {
   start: string

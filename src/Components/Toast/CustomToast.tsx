@@ -4,7 +4,7 @@ import { colors } from '../../Theme/Colors'
 import { normalize } from '../../Utility/ResponsiveDimension'
 import { fontFamily, sizes } from '../../Assets/Font'
 import { isTablet } from 'react-native-device-info'
-import Icon from 'react-native-vector-icons/EvilIcons'
+import { Icon } from '../../Theme/Icon'
 const height = Dimensions.get('screen').height
 
 interface CustomToastProps {}

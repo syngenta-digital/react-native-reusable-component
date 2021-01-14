@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
-import Icon from 'react-native-vector-icons/EvilIcons'
 
 import { SIZES } from '../../Assets/Font'
 import { colors } from '../../Theme/Colors'
+import { Icon } from '../../Theme/Icon'
 import AppStyles from '../../Utility/AppStyles'
 
 interface props {

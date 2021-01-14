@@ -68,7 +68,7 @@ SearchFieldStories.add('Animated Search Filed other props', () => {
         btnSize='medium'
         btnStyle={{ marginVertical: 40 }}
         title='Toggle Field'
-        onPress={() => refSearchField.toggleAnimation()}
+        onPress={() => refSearchField?.toggleAnimation()}
       />
     </>
   )

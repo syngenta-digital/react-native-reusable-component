@@ -2,10 +2,10 @@ import React, { useRef, useState } from 'react'
 import { Animated, Easing, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 import { isTablet } from 'react-native-device-info'
-import Icon from 'react-native-vector-icons/FontAwesome5'
 
 import { SIZES } from '../../Assets/Font'
 import { colors } from '../../Theme/Colors'
+import { Icon } from '../../Theme/Icon'
 import AppStyles from '../../Utility/AppStyles'
 
 interface searchProps {
@@ -116,7 +116,7 @@ const SearchField = ({ ...props }: searchProps) => {
           {imagePath?.name ? (
             <Image source={{ uri: imagePath?.name }} style={[styles.clearSearchIcon, imagePath?.style]} />
           ) : (
-            <Icon name={clearIcon?.name} size={20 || clearIcon?.size} color={clearIcon?.color} />
+            <Icon name={clearIcon?.name} size={14 || clearIcon?.size} color={clearIcon?.color} />
           )}
         </TouchableOpacity>
       </View>
@@ -141,7 +141,7 @@ SearchField.defaultProps = {
   searchOnSubmit: () => {},
   onTextChange: () => {},
   clearSearchResult: () => {},
-  clearIcon: { name: 'times', size: SIZES(20), color: colors.grey60 }
+  clearIcon: { name: 'close', size: SIZES(20), color: colors.grey60 }
 }
 
 export default SearchField

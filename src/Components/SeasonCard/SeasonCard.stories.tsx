@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react'
 
 import SeasonsCard from './Index'
@@ -10,7 +11,9 @@ import { action } from '@storybook/addon-actions'
 import { colors } from '../../Theme/Colors'
 
 const SeasonCardStories = storiesOf('Season Card', module)
-SeasonCardStories.addDecorator((getStory: any) => <CenterView>{getStory()}</CenterView>)
+SeasonCardStories.addDecorator((getStory: any) => (
+  <CenterView customStyle={{ paddingHorizontal: 15 }}>{getStory()}</CenterView>
+))
 
 SeasonCardStories.add('Basic season Card', () => (
   <SeasonsCard
@@ -20,7 +23,7 @@ SeasonCardStories.add('Basic season Card', () => (
       endDate: formatDate(new Date(), 'DD MMM, YY')
     })}
     onEdit={action('Edit function return selecetd season...')}
-    cropIcon={object('cropIcon', { name: 'settings', color: colors.black, size: 50 })}
+    cropIcon={object('cropIcon', { name: 'seasonsTab', color: colors.grey60, size: 50 })}
     startDateTitle={text('startDateTitle', 'Start')}
     endDateTitle={text('endDateTitle', 'End')}
     editTitle={text('editTitle', 'Edit')}
