@@ -4,10 +4,10 @@ import { colors } from '../../Theme/Colors'
 import { normalize } from '../../Utility/ResponsiveDimension'
 import { fontFamily, sizes } from '../../Assets/Font'
 import { isTablet } from 'react-native-device-info'
-import Icon from 'react-native-vector-icons/EvilIcons'
+import { Icon } from '../../Theme/Icon'
 const height = Dimensions.get('screen').height
 
-interface CustomToastProps { }
+interface CustomToastProps {}
 
 interface CustomToastState {
   showToast: boolean
@@ -19,7 +19,7 @@ interface CustomToastState {
 
 export default class CustomToast extends React.Component<CustomToastProps, CustomToastState> {
   static shared: any
-  animateOpacityValue: any
+  animateOpacityValue: Animated.Value
   timerID: any
 
   constructor(props: CustomToastProps) {
@@ -68,17 +68,19 @@ export default class CustomToast extends React.Component<CustomToastProps, Custo
       })
     }, duration)
   }
-  setToastType(type = 'success') {
+  setToastType(type) {
     let color
-    if (type == 'error') color = colors.damageRed
-    if (type == 'primary') color = colors.blue
-    if (type == 'warning') color = colors.yellow
-    if (type == 'success') color = colors.blue
+    if (type === 'error') color = colors.damageRed
+    if (type === 'primary') color = colors.blue
+    if (type === 'warning') color = colors.yellow
+    if (type === 'success') color = colors.blue
     this.setState({ toastColor: color })
   }
+
   setToastPosition(position: any) {
     position ? this.setState({ position: position }) : null
   }
+
   render() {
     if (this.state.showToast) {
       return (
@@ -87,7 +89,8 @@ export default class CustomToast extends React.Component<CustomToastProps, Custo
             styles.animatedToastView,
             {
               transform: [{ translateY: this.animateOpacityValue }],
-              top: this.state.position == 'top' ? height / 2 : '85%'
+              // top: this.state.position == 'top' ? height / 2 : '85%',
+              top: 10
             }
           ]}>
           <View style={[styles.bottomPopup, { borderColor: this.state.toastColor }]}>
@@ -108,7 +111,7 @@ export default class CustomToast extends React.Component<CustomToastProps, Custo
           </View>
         </Animated.View>
       )
-    } else return null
+    } else return <View  />
   }
 }
 

@@ -4,12 +4,12 @@ import { TouchableOpacity, Text, StyleSheet, ViewStyle } from 'react-native'
 import { colors } from '../../Theme/Colors'
 import { SIZES } from '../../Assets/Font'
 
-import Icon from 'react-native-vector-icons/FontAwesome5'
 import PropTypes from 'prop-types'
+import { Icon } from '../../Theme/Icon'
 
 interface Props {
   title?: string
-  onPress?: any
+  onPress: any
   disabled?: boolean
   btnStyle?: object
   textStyle?: object
@@ -19,6 +19,7 @@ interface Props {
   btnSize?: string
   noTitle?: boolean
   children?: React.ReactNode
+  textProps?: any
   leftIconName?: string
   rightIconName?: string
   iconColor?: string
@@ -40,7 +41,8 @@ const CustomButton = ({
   shadowButton,
   btnSize,
   children,
-  noTitle
+  noTitle,
+  textProps
 }: Props) => {
   return (
     <>
@@ -70,7 +72,7 @@ const CustomButton = ({
         )}
         {!noTitle && (
           <Text
-            numberOfLines={2}
+            {...textProps}
             style={[
               styles.title,
               borderButton && styles.borderButtonText,

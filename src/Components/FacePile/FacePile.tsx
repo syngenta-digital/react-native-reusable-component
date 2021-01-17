@@ -1,21 +1,24 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
-import Icon from 'react-native-vector-icons/EvilIcons'
 
 import { SIZES } from '../../Assets/Font'
 import { colors } from '../../Theme/Colors'
+import { Icon } from '../../Theme/Icon'
 import AppStyles from '../../Utility/AppStyles'
 
 interface props {
   array: Array<any>
   colorsArray?: Array<any>
-  circleBgColor: string
+  circleBgColor?: string
   circleStyle?: any
   containerStyle?: any
   maxCircleValue: number
   type: string
-  defaultCropIconName?: string | ''
+  defaultIconName: string | ''
   imageStyle?: any
+  circleSize?: number
+  textColor?: any
 }
 
 const renderText = (
@@ -24,27 +27,37 @@ const renderText = (
   index: number,
   element: any,
   maxCircleValue: number,
-  defaultCropIconName: string | undefined,
-  imageStyle: any
+  defaultIconName: string | '',
+  imageStyle: any,
+  circleSize?: number,
+  textColor?: any
 ) => {
+  const renderCircleText = (text: string | null | undefined) => (
+    <Text style={[{ color: textColor || 'red', fontSize: 11 }, circleSize ? { fontSize: circleSize / 2.2 } : {}]}>
+      {text}
+    </Text>
+  )
+
+  if (index === maxCircleValue) {
+    return <>{renderCircleText('+' + String(array.length - maxCircleValue))}</>
+  }
+
   switch (type) {
     case 'name':
+      return <>{renderCircleText(element.toUpperCase())}</>
+    case 'icon':
       return (
-        <Text style={styles.circleText}>
-          {index === maxCircleValue ? '+' + String(array.length - maxCircleValue) : element.toUpperCase()}
-        </Text>
+        <Icon
+          name={element || defaultIconName}
+          color={textColor || colors.white}
+          size={(circleSize && circleSize / 2.2) || 20}
+          style={styles.centerAlign}
+        />
       )
-    case 'icon': {
-      if (element) {
-        return <Icon name={element} color={colors.white} size={20} />
-      } else {
-        return defaultCropIconName ? <Icon name={defaultCropIconName} color={colors.white} size={20} /> : <View />
-      }
-    }
     case 'imageUrls':
       return (
         <Image
-          style={imageStyle}
+          style={[styles.imageInCircle, imageStyle]}
           source={{
             uri: element
           }}
@@ -62,21 +75,36 @@ const FacePile = ({
   circleStyle,
   maxCircleValue,
   type,
-  defaultCropIconName,
+  circleSize,
+  defaultIconName,
   imageStyle,
-  containerStyle
+  containerStyle,
+  textColor
 }: props) => (
   <View style={[AppStyles.addRow, containerStyle]}>
     {array.map((element: string, index: number) => {
       if (index <= maxCircleValue) {
         return (
           <View
+            key={index}
             style={[
               styles.circleView,
-              { backgroundColor: colorsArray?.length ? colorsArray[index] : circleBgColor || colors.white },
+              { backgroundColor: colorsArray?.length ? colorsArray[index] : circleBgColor || colors.grey20 },
+              circleSize && { width: circleSize, height: circleSize, borderRadius: circleSize / 2 },
+              type === 'imageUrls' && { padding: 20 },
               circleStyle
             ]}>
-            {renderText(array, type, index, element, maxCircleValue, defaultCropIconName, imageStyle)}
+            {renderText(
+              array,
+              type,
+              index,
+              element,
+              maxCircleValue,
+              defaultIconName,
+              imageStyle,
+              circleSize,
+              textColor
+            )}
           </View>
         )
       }
@@ -86,7 +114,8 @@ const FacePile = ({
 
 FacePile.defaultProps = {
   maxCircleValue: 4,
-  defaultCropIconName: ''
+  defaultIconName: '',
+  textColor: colors.black
 }
 
 const styles = StyleSheet.create({
@@ -97,15 +126,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
-    marginLeft: -SIZES(5),
+    marginLeft: -SIZES(8),
     borderWidth: 1,
-    borderColor: colors.grey40,
+    borderColor: colors.grey60,
     top: -SIZES(6)
   },
   circleText: {
     color: colors.black,
     fontSize: SIZES(11)
-  }
+  },
+  imageInCircle: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    alignSelf: 'center'
+  },
+  centerAlign: { alignSelf: 'center' }
 })
 
 export default FacePile

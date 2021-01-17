@@ -121,5 +121,5 @@ export const colors = {
   borderColor: '#E5E5E5',
   green: '#AAB400',
   baseRed: '#D91E3F',
-  gray5: '#E8EAED',
+  gray5: '#E8EAED'
 }

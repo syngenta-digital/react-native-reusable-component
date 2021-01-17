@@ -5,13 +5,6 @@ import SliderArea from '../Components/SliderArea/SliderArea'
 
 export default class SliderDemo extends React.Component {
   refSlideArea: any
-  constructor(props: any) {
-    super(props)
-    this.state = {
-      visibility: false
-    }
-  }
-
   render() {
     return (
       <View style={styles.container}>
