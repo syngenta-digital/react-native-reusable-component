@@ -5,6 +5,9 @@ export const colors = {
 
   white: '#ffffff',
   black: '#000000',
+  blackOpacity2: 'rgba(0,0,0,0.2)',
+  blackOpacity3: 'rgba(0,0,0,0.3)',
+  blackOpacity6: 'rgba(0,0,0,0.7)',
 
   blue10: '#EAF6FF',
   blue20: '#C6E6FF',
@@ -104,5 +107,19 @@ export const colors = {
   grey70: '#4D5165',
   grey80: '#363948',
   grey90: '#232630',
-  grey100: '#14151C'
+  grey100: '#14151C',
+
+  damageRed: '#F74141',
+  blue: '#00A0BE',
+  yellow: '#F9C43D',
+  gray1: '#2F3031',
+  gray3: '#707374',
+  btnBackground: '#00B5D8',
+  gray_1: '#2F3031',
+  gray6: '#F2F4F6',
+  gray2: '#515253',
+  borderColor: '#E5E5E5',
+  green: '#AAB400',
+  baseRed: '#D91E3F',
+  gray5: '#E8EAED'
 }
