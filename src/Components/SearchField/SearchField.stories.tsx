@@ -7,7 +7,6 @@ import CenterView from '../CenterView/index'
 import { number, object, select, text } from '@storybook/addon-knobs'
 import { storiesOf } from '@storybook/react-native'
 
-import { colors } from '../../Theme/Colors'
 import CustomButton from '../Button/Button'
 import { action } from '@storybook/addon-actions'
 
@@ -26,12 +25,12 @@ const Options = {
 }
 
 SearchFieldStories.add('Basic Animated Search Filed', () => {
-  let refSearchField: any
+  // let refSearchField: any
   return (
     <>
       <SearchField
         placeholderTxt={text('placeholderTxt', 'Search here ...')}
-        ref={(ref: any) => (refSearchField = ref)}
+        // ref={(ref: any) => (refSearchField = ref)}
         onTextChange={action('Function to be called on text change')}
       />
       {/* <CustomButton

@@ -1,10 +1,15 @@
 import React from 'react'
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
-import { colors } from '../../Theme/Colors'
-import { fontFamily, sizes } from '../../Assets/Font'
+
+import RenderSyncIcon from '../SyncIcon/SyncIcon'
+import SyncDetails from '../SyncIcon/SyncDetails'
 import Card from './Card'
+
+import { colors } from '../../Theme/Colors'
+import { fontFamily, SIZES, sizes } from '../../Assets/Font'
 import { isTablet } from 'react-native-device-info'
 import { Icon } from '../../Theme/Icon'
+
 interface PropertyCardProps {
   onPress: any
   lastUpdated: any
@@ -14,18 +19,26 @@ interface PropertyCardProps {
   areaUnit: any
   onEditPress: any
   onEnterPress: any
+  syncStatus: string
+  errorInRequest?: any
+  viewMoreErrors?: () => void
+  syncMsgText: string
 }
 
-interface PropertyCardState {}
+interface PropertyCardState {
+  isSyncMsgVisible: boolean
+}
 
 export default class PropertyCard extends React.Component<PropertyCardProps, PropertyCardState> {
   CONVERSION_RATE = 2.47105
   constructor(props: PropertyCardProps) {
     super(props)
-    this.state = {}
+    this.state = {
+      isSyncMsgVisible: false
+    }
   }
-  getAreaByUnit = (area: any) => {
-    let newUnit = 'ha'
+  getAreaByUnit = (area: any, newUnit: string) => {
+    newUnit = newUnit || 'ha'
     if (!area || area === '--') {
       return '--'
     }
@@ -77,6 +90,18 @@ export default class PropertyCard extends React.Component<PropertyCardProps, Pro
                 <Text style={PropertyCardStyles.titleText} numberOfLines={2}>
                   {this.props.propertyName}
                 </Text>
+                <RenderSyncIcon
+                  syncStatus={this.props?.syncStatus}
+                  onPress={() => this.setState({ isSyncMsgVisible: !this.state.isSyncMsgVisible })}
+                />
+                <SyncDetails
+                  errorInRequest={this.props?.errorInRequest}
+                  viewMoreErrors={this.props?.viewMoreErrors}
+                  isVisible={this.state.isSyncMsgVisible}
+                  syncStatus={this.props?.syncStatus}
+                  syncMsgText={this.props?.syncMsgText}
+                  syncMsgViewStyle={PropertyCardStyles.syncDetail}
+                />
               </View>
               {this.renderCropView()}
             </TouchableOpacity>
@@ -107,6 +132,7 @@ const PropertyCardStyles = StyleSheet.create({
     shadowColor: colors.gray1,
     shadowOpacity: 0.2,
     shadowRadius: 5,
+    paddingRight: 0,
     shadowOffset: { height: 2, width: 0 }
   },
   cardTop: {
@@ -179,6 +205,10 @@ const PropertyCardStyles = StyleSheet.create({
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
     backgroundColor: colors.btnBackground
+  },
+  syncDetail: {
+    top: SIZES(47),
+    right: SIZES(20)
   },
   titleText: {
     fontFamily: fontFamily.notosans_regular,

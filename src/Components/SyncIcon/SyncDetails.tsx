@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, ViewStyle } from 'react-native'
 import { SIZES } from '../../Assets/Font'
 import { colors } from '../../Theme/Colors'
 
@@ -10,13 +10,24 @@ interface Props {
   viewMoreErrors?: any
   viewMore?: string
   syncMsgText: string
+  syncMsgViewStyle?: ViewStyle
+  triangleStyle?: ViewStyle
 }
 
-const renderSyncDetails = ({ syncStatus, errorInRequest, viewMore, viewMoreErrors, syncMsgText, isVisible }: Props) => {
+const renderSyncDetails = ({
+  syncStatus,
+  errorInRequest,
+  viewMore,
+  viewMoreErrors,
+  syncMsgText,
+  isVisible,
+  syncMsgViewStyle,
+  triangleStyle
+}: Props) => {
   if (isVisible && syncStatus === 'error') {
     return (
-      <View style={styles.syncMsgView}>
-        <View style={[styles.triangle]} />
+      <View style={[styles.syncMsgView, syncMsgViewStyle]}>
+        <View style={[styles.triangle, triangleStyle]} />
         {errorInRequest &&
           errorInRequest.slice(0, 2).map((item: any, i: number) => (
             <Text style={styles.syncErrorMsg} numberOfLines={1}>
@@ -36,8 +47,8 @@ const renderSyncDetails = ({ syncStatus, errorInRequest, viewMore, viewMoreError
     )
   } else if (isVisible) {
     return (
-      <View style={styles.syncMsgView}>
-        <View style={styles.triangle} />
+      <View style={[styles.syncMsgView, syncMsgViewStyle]}>
+        <View style={[styles.triangle, triangleStyle]} />
         <Text style={styles.syncMsg}>{syncMsgText}</Text>
       </View>
     )
