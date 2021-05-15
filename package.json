@@ -1,17 +1,18 @@
 {
   "name": "react_native_reusable_component",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/syngenta-digital/react-native-reusable-component",
+  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "https://github.com/syngenta-digital/react-native-reusable-component"
   },
-  "author": "Lalitkumar Sakare <Lalitkumar_Hiraman.Sakare@syngenta.com>"
+  "author": "Lalitkumar Sakare <Lalitkumar_Hiraman.Sakare@syngenta.com>",
   "contributors": [
     "Samiksha Jagtap <samiksha_mohan.jagtap@syngenta.com>",
     "Mahipal Singh <mahipal.singh-1@syngenta.com>"
   ],
-  "react-native": "src/index.ts",
+  "react-native": "src/Index.ts",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
