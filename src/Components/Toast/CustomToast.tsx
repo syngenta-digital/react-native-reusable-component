@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react'
 import { View, StyleSheet, Text, Animated, Dimensions } from 'react-native'
 import { colors } from '../../Theme/Colors'
@@ -7,7 +8,7 @@ import { isTablet } from 'react-native-device-info'
 import { Icon } from '../../Theme/Icon'
 const height = Dimensions.get('screen').height
 
-interface CustomToastProps {}
+interface CustomToastProps { }
 
 interface CustomToastState {
   showToast: boolean
@@ -111,7 +112,7 @@ export default class CustomToast extends React.Component<CustomToastProps, Custo
           </View>
         </Animated.View>
       )
-    } else return <View  />
+    } else return <View />
   }
 }
 

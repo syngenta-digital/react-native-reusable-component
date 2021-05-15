@@ -8,6 +8,8 @@ target 'react_native_reusable_component' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
   target 'react_native_reusable_componentTests' do
     inherit! :complete
     # Pods for testing

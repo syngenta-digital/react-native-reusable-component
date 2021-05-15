@@ -55,16 +55,11 @@ export default class PropertyCard extends React.Component<PropertyCardProps, Pro
     return (
       <View style={PropertyCardStyles.areaCropView}>
         <View style={PropertyCardStyles.areaView}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Icon
-              name='property'
-              size={sizes.size12}
-              color={colors.gray2}
-              style={{ marginLeft: 1, marginRight: sizes.size5 }}
-            />
+          <View style={PropertyCardStyles.rowCenter}>
+            <Icon name='property' size={sizes.size12} color={colors.gray2} style={PropertyCardStyles.leftPropIcon} />
             <Text style={PropertyCardStyles.areaNoText}>{this.props.fieldsCount + ' areas'}</Text>
           </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={PropertyCardStyles.rowCenter}>
             <Icon name='area' size={sizes.size12} color={colors.gray2} style={{ marginLeft: 1, marginRight: 5 }} />
             <Text ellipsizeMode='tail' numberOfLines={2} style={[PropertyCardStyles.areaNoText]}>
               {this.getAreaByUnit(this.props.totalArea, this.props.areaUnit) + ' ' + this.props.areaUnit}
@@ -123,6 +118,8 @@ export default class PropertyCard extends React.Component<PropertyCardProps, Pro
 }
 
 const PropertyCardStyles = StyleSheet.create({
+  leftPropsIcon: { marginLeft: 1, marginRight: sizes.size5 },
+  rowCenter: { flexDirection: 'row', alignItems: 'center' },
   cardContainer: {
     borderRadius: 8,
     backgroundColor: colors.white,
