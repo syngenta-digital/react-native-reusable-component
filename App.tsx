@@ -2,7 +2,6 @@
 // import { NavigationContainer } from '@react-navigation/native'
 // import { AppStack } from './src/Routes/AppStack'
 // import AlertView from './src/Components/Alert/AlertView'
-
 // const App = () => (
 //   <NavigationContainer>
 //     <AppStack />
